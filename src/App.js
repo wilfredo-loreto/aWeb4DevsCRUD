@@ -10,7 +10,7 @@ import {
 
 function App() {
   return (
-    <HashRouter>
+    <Router>
       <div className="app">
 
         <h1>Aweb4devs CRUD</h1>
@@ -59,7 +59,7 @@ function App() {
 
 
       </div>
-    </HashRouter>
+    </Router>
   );
 }
 
