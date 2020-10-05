@@ -11,7 +11,7 @@ import {
 function App() {
   return (
     <Router>
-      <div className="app">
+      <div className="app" >
 
         <h1>Aweb4devs CRUD</h1>
 
