@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import Header from "./components/Header"
 
 import {
   BrowserRouter as Router,
@@ -13,6 +14,7 @@ function App() {
     <Router>
       <div className="app">
 
+        <Header/>
         <h1>Aweb4devs CRUD</h1>
 
         <Switch>
@@ -54,9 +56,6 @@ function App() {
           </Route>
 
         </Switch>
-
-
-
 
       </div>
     </Router>
