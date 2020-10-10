@@ -113,6 +113,12 @@
         align-items: center;
         width: 100%;
         margin: 10px 0;
+        .referenceText{
+          color: $background-color;
+          font-size:22px;
+          text-align: center;
+          width: 20%;
+        }
         .numberlist{
           color:$background-color;
           font-size: 28px;
@@ -187,4 +193,19 @@
       margin: 3px 0;    
      }
     }   
+  }
+  .dynamicContentSubtitle{
+    background-color: #D1411B;
+  }
+  .dynamicContentText{
+    background-color: #5C931B;
+  }
+  .dynamicContentImage{
+    background-color: #2A4281;
+  }
+  .dynamicContentList{
+    background-color: #B206D1;
+  }
+  .dynamicContentReferences{
+    background-color: $main-color;
   }
