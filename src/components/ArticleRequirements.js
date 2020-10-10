@@ -21,7 +21,7 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Technology Type</h2>
-              <img src="/icons/close.svg" />
+              <img src="/icon/close.svg" />
             </div>
             <div className="colContainer">
               <div className="rowContainer">
@@ -57,7 +57,7 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Title</h2>
-              <img src="/icons/close.svg" />
+              <img src="/icon/close.svg" />
             </div>
             <div className="colContainer">
               <div className="rowContainer">
@@ -68,7 +68,7 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Summary</h2>
-              <img src="/icons/close.svg" />
+              <img src="/icon/close.svg" />
             </div>
             <div className="colContainer">
               <div className="rowContainer">
@@ -78,19 +78,8 @@ class ArticleRequirements extends Component {
           </div>
           <div className="blockContainer">
             <div className="subtitleContainer">
-              <h2 className="subtitle">Image</h2>
-              <img src="/icons/close.svg" />
-            </div>
-            <div className="colContainer">
-              <div className="rowContainer">
-                <input type="button" value="Submit" className="submitButton" accept="image/png, image/jpg"/>
-              </div>
-            </div>
-          </div>
-          <div className="blockContainer">
-            <div className="subtitleContainer">
               <h2 className="subtitle">Technologies</h2>
-              <img src="/icons/close.svg" />
+              <img src="/icon/close.svg" />
             </div>
             <div className="colContainer">
               <div className="rowContainer lessMargin">
@@ -104,7 +93,7 @@ class ArticleRequirements extends Component {
               </div>
               <div className="rowContainer lessMargin">
                 <div className="addNewItem">
-                <img src="/icons/plus.svg" className="plusImage"/>
+                <img src="/icon/plus.svg" className="plusImage"/>
                 <span>ADD NEW TECHNOLOGY</span>
                 </div>
               </div>
@@ -113,7 +102,7 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Tags</h2>
-              <img src="/icons/close.svg" />
+              <img src="/icon/close.svg" />
             </div>
             <div className="colContainer">
               <div className="rowContainer lessMargin">
@@ -127,7 +116,7 @@ class ArticleRequirements extends Component {
               </div>
               <div className="rowContainer lessMargin">
                 <div className="addNewItem">
-                <img src="/icons/plus.svg" className="plusImage"/>
+                <img src="/icon/plus.svg" className="plusImage"/>
                 <span>ADD NEW TAG</span>
                 </div>
               </div>

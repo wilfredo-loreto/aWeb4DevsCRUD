@@ -18,7 +18,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Technology Type</h2>
-            <img src="/icons/close.svg" />
+            <img src="/icon/close.svg" />
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -49,7 +49,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Title</h2>
-            <img src="/icons/close.svg" />
+            <img src="/icon/close.svg" />
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -60,7 +60,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Summary</h2>
-            <img src="/icons/close.svg" />
+            <img src="/icon/close.svg" />
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -71,7 +71,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Image</h2>
-            <img src="/icons/close.svg" />
+            <img src="/icon/close.svg" />
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -80,15 +80,18 @@ class CreateDocument extends Component {
                 className="submitButton"
                 accept="image/png, image/jpg"
               />
-                           <input type="text" placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT" className="lessWidth" />
-
+              <input
+                type="text"
+                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
+                className="lessWidth"
+              />
             </div>
           </div>
         </div>
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Logo</h2>
-            <img src="/icons/close.svg" />
+            <img src="/icon/close.svg" />
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -98,14 +101,18 @@ class CreateDocument extends Component {
                 accept="image/png, image/jpg"
               />
 
-              <input type="text" placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT" className="lessWidth" />
+              <input
+                type="text"
+                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
+                className="lessWidth"
+              />
             </div>
           </div>
         </div>
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Tags</h2>
-            <img src="/icons/close.svg" />
+            <img src="/icon/close.svg" />
           </div>
           <div className="colContainer">
             <div className="rowContainer lessMargin">
@@ -118,8 +125,8 @@ class CreateDocument extends Component {
               <input type="text" className="lessWidth" />
             </div>
             <div className="rowContainer lessMargin">
-              <div className="addNewItem">
-                <img src="/icons/plus.svg" className="plusImage" />
+              <div className="addNewItem ">
+                <img src="/icon/plus.svg" className="plusImage" />
                 <span>ADD NEW TAG</span>
               </div>
             </div>
@@ -130,7 +137,7 @@ class CreateDocument extends Component {
             <h2 className="subtitle">
               Parent (Empty if this is already a Parent)
             </h2>
-            <img src="/icons/close.svg" />
+            <img src="/icon/close.svg" />
           </div>
           <div className="colContainer">
             <div className="rowContainer">
