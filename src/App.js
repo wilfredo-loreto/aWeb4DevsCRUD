@@ -4,6 +4,7 @@ import Header from "./components/Header"
 import ArticlesList from "./components/ArticlesList"
 import FrontendList from "./components/FrontendList"
 import BackendList from "./components/BackendList"
+import CreateDocument from "./components/CreateDocument"
 import {
   BrowserRouter as Router,
   Switch,
@@ -66,7 +67,7 @@ function App() {
 
           <Route path="/create">
 
-          <h1>4</h1>
+          <CreateDocument />
 
           </Route>
 
