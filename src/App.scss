@@ -1,38 +1,53 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: "Century";
+  src: url("/fonts/CenturyGothic.ttf");
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: "CenturyBold";
+  src: url("/fonts/CenturyGothicBold.ttf");
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@font-face{
+  font-family:"OpenSans";
+  src: url("/fonts/OpenSans-Regular.ttf");
+}
+
+$main-color: #d11149ff;
+$background-color: #f9f9f9;
+$shadow-color: rgba(68, 68, 68, 0.15);
+$black:#2E2F2F;
+
+@function random-hex(){
+  $rgb: '';
+  $i: 6;
+  @while $i > 0 {
+    $hex-unit: random(16) - 1;
+    $letters: A, B, C, D, E, F;
+    @if $hex-unit > 9 { 
+      $hex-unit: nth($letters, ($hex-unit - 9));
+    };
+    $rgb: str-insert($rgb, ("" + $hex-unit), 0);
+    $i: $i - 1;
   }
+  @return unquote("#"+"#{$rgb}");
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@mixin test(){
+  
+  border: solid 5px random-hex();
+ 
 }
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Century";
+  box-sizing: border-box;
+  ::selection{
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+    background: #FFDFE8
+    
   }
-  to {
-    transform: rotate(360deg);
+  ::-moz-selection{
+    background: #FFDFE8
   }
 }

@@ -1,17 +1,16 @@
 import React from 'react';
 import './App.scss';
-
+import CreateDocument from './components/CreateDocument'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  HashRouter
 } from "react-router-dom";
 
 function App() {
   return (
     <Router>
-      <div className="app" >
+      <div className="app">
 
         <h1>Aweb4devs CRUD</h1>
 
@@ -43,7 +42,7 @@ function App() {
 
           <Route path="/create">
 
-          <h1>4</h1>
+          <CreateDocument />
 
           </Route>
 

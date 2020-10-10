@@ -1,0 +1,103 @@
+@import "./../App.scss";
+
+.mainContainer1 {
+  margin: auto;
+  width: 80%;
+
+  height: auto;
+  .title {
+    color: $main-color;
+    text-align: center;
+    margin: 2% auto;
+  }
+  .blockContainer {
+    color: $background-color;
+    background-color: $main-color;
+    border-radius: 15px;
+    margin: 2% auto;
+
+    width: 100%;
+    padding: 12px 20px;
+    filter: drop-shadow(15px 15px 15px rgba(0, 0, 0, 0.25));
+    .subtitleContainer {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      .subtitle {
+        font-weight: 100;
+      }
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .colContainer {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-around;
+      margin-top: 15px;
+     
+      .rowContainer {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        width: 100%;
+        margin: 10px 0;
+
+        input[type="radio"] {
+          border: 0;
+          height: 1.5em;
+          width: 1.5em;
+        }
+        input[type="text"] {
+          height: 30px;
+          border: 3px solid #4e4e4e;
+          border-radius: 7px;
+          padding-left: 5px;
+          &:focus {
+              outline: none;
+            }
+        }
+       
+        .lessWidth{
+            width: 50%;
+        }
+        .totalWidth{
+            width: 100%;
+        }
+        .label {
+          margin-left: 10px;
+          font-size: 18px;
+        }
+        .addNewItem{
+            border: solid 3px white;
+            border-radius:7px;
+            height: 30px;
+            width: 50%;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            transition:400ms;
+            &:hover{
+                background: white;
+                cursor: pointer;
+                img{
+                    filter: invert(20%) sepia(89%) saturate(6036%) hue-rotate(335deg) brightness(83%) contrast(96%);
+                }
+                span{
+                    color: $main-color
+                }
+            }
+            img{
+                filter: invert(100%) sepia(1%) saturate(11%) hue-rotate(270deg) brightness(105%) contrast(100%);
+                width: 25px;
+                height: 25px;
+            }
+        }
+      }
+      .lessMargin{
+      margin: 3px 0;    
+     }
+    }   
+  }
+}
