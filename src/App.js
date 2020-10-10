@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.scss';
-import CreateDocument from './components/CreateDocument'
+import Header from "./components/Header"
+import ArticlesList from "./components/ArticlesList"
+import FrontendList from "./components/FrontendList"
+import BackendList from "./components/BackendList"
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route
 } from "react-router-dom";
 
 function App() {
@@ -12,8 +15,8 @@ function App() {
     <Router>
       <div className="app">
 
-        <h1>Aweb4devs CRUD</h1>
-
+        <Header/>
+       
         <Switch>
 
           <Route path="/" exact>
@@ -24,19 +27,31 @@ function App() {
 
           <Route path="/articles">
 
-          <h1>2</h1>
+            <ArticlesList 
+              title = "Articles"
+              link = "articles"
+            
+            />
 
           </Route>
 
           <Route path="/frontend">
 
-          <h1>2</h1>
+          <FrontendList
+              title = "Front-end Techs"
+            
+        
+            />
 
           </Route>
 
           <Route path="/backend">
 
-          <h1>3</h1>
+          <BackendList 
+              title = "Back-end Techs"
+           
+           
+            />
 
           </Route>
 
@@ -46,16 +61,13 @@ function App() {
 
           </Route>
 
-          <Route path="/edit">
+          <Route path="/edit/:title">
 
           <h1>5</h1>
 
           </Route>
 
         </Switch>
-
-
-
 
       </div>
     </Router>
