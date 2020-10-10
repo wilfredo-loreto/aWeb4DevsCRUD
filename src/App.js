@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 
 function App() {
+
+  
   return (
     <Router>
       <div className="app">
@@ -19,6 +21,12 @@ function App() {
        
         <Switch>
 
+        {  window.onbeforeunload = function preguntarAntesDeSalir()
+    {
+        return "¿Seguro que quieres salir?";
+    }
+}
+
           <Route path="/" exact>
 
             <h1>1</h1>
@@ -26,7 +34,8 @@ function App() {
           </Route>
 
           <Route path="/articles">
-
+      
+          
             <ArticlesList 
               title = "Articles"
               link = "articles"
@@ -73,5 +82,7 @@ function App() {
     </Router>
   );
 }
+
+
 
 export default App;

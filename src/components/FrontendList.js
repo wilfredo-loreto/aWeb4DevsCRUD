@@ -28,6 +28,35 @@ export default class FrontendList extends Component {
     this.setState({ pageOfItems: pageOfItems });
   }
 
+  corfirmAlert(title, count){
+   
+    if(window.confirm("Are you sure?")){
+
+      this.deleteArticle(title, count)
+
+    }
+
+  }
+
+  async deleteArticle(title, count){
+
+    const res = axios.delete(
+      "http://aweb4devsapi.herokuapp.com/delete-tech/" + title
+    )
+    const posts = (await res).data
+    
+    if(posts.message === "deleted"){
+      
+      var newData = this.state.frontend
+      newData.splice(count,1)
+      console.log(this.state.pageOfItems)
+  
+      this.setState({pageOfItems: newData })
+      
+    }
+
+  }
+
   render() {
     var data = this.state.frontend;
     return (
@@ -66,7 +95,7 @@ export default class FrontendList extends Component {
                       <h3>EDIT</h3>
                     </Link>
 
-                    <div className="delete">
+                    <div onClick={() => this.corfirmAlert(article.title,count)} className="delete">
                       <img src="/icon/delete.png" alt="delete icon" />
                       <h3>DELETE</h3>
                     </div>
