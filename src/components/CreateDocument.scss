@@ -18,6 +18,9 @@
   height: 2000px;
   width:75%;
   margin-right: 17.5%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
 .toolsContainer{
   width: 80px;
@@ -209,3 +212,21 @@
   .dynamicContentReferences{
     background-color: $main-color;
   }
+.createDocumentButton{
+  
+  border-radius: 15px;
+  width: 200px;
+  height: 60px;
+  letter-spacing: 10%;
+  font-size:28px;
+  background-color: $main-color;
+  color: $background-color;
+  margin-top: 10%;
+  transition: 400ms;
+  &:hover{
+    color: $main-color;
+    background-color: $background-color;
+    border: solid 3px $main-color;
+    cursor: pointer;
+  }
+}
