@@ -73,7 +73,7 @@ class CreateDocument extends Component {
         ):null}
        
       </form>
-      </React.Fragment>
+      </React.Fragment> 
     );
   }
 }

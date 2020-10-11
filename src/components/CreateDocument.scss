@@ -15,7 +15,7 @@
 }
 .mainContainer2{
   margin: 0 auto;
-  height: 2000px;
+  min-height: 800px;
   width:75%;
   margin-right: 17.5%;
   display: flex;
@@ -215,18 +215,24 @@
 .createDocumentButton{
   
   border-radius: 15px;
-  width: 200px;
-  height: 60px;
+  width:200px;
+  height:100px;
   letter-spacing: 10%;
-  font-size:28px;
+  font-size:34px;
   background-color: $main-color;
   color: $background-color;
-  margin-top: 10%;
+  margin: 10% 0;
   transition: 400ms;
   &:hover{
     color: $main-color;
     background-color: $background-color;
-    border: solid 3px $main-color;
+    border: solid 2px $main-color;
     cursor: pointer;
+  }
+  &:focus{
+    outline: none;
+    color:#5C931B;
+    border-color:#5C931B;
+    background-color: $background-color;
   }
 }
