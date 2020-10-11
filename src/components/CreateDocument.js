@@ -23,7 +23,7 @@ class CreateDocument extends Component {
 
   render() {
     return (
-      <React.Fragment>
+  
         <form className="form">
           
         <div className="hideToolbar">
@@ -32,7 +32,6 @@ class CreateDocument extends Component {
             <div className="blockContainer">
               <div className="subtitleContainer">
                 <h2 className="subtitle">Document Type</h2>
-                <img src="/icon/close.svg" />
               </div>
               <div className="colContainer">
                 <div className="rowContainer">
@@ -43,7 +42,7 @@ class CreateDocument extends Component {
                     onClick={() => this.handleBlocks("article")}
                     type="radio"
                     />
-                  <label className="label" for="isArticle">
+                  <label className="label" htmlFor="isArticle">
                     Article
                   </label>
                 </div>
@@ -55,7 +54,7 @@ class CreateDocument extends Component {
                     onClick={() => this.handleBlocks("tech")}
                     type="radio"
                     />
-                  <label className="label" for="isTech">
+                  <label className="label" htmlFor="isTech">
                     Technology
                   </label>
                 </div>
@@ -73,7 +72,7 @@ class CreateDocument extends Component {
         ):null}
        
       </form>
-      </React.Fragment> 
+   
     );
   }
 }

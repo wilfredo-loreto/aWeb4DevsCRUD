@@ -3,11 +3,12 @@ import "./CreateDocument.scss";
 
 class DynamicContentList extends Component {
   render() {
+
     return (
       <div className="blockContainer dynamicContentList">
             <div className="subtitleContainer">
               <h2 className="subtitle">List</h2>
-              <img src="/icon/close.svg" />
+              <img  alt="close button" src="/icon/close.svg" onClick={(e)=>this.props.remove(this.props.key,e)} />
             </div>
             <div className="colContainer">
               <div className="rowContainer lessMargin">

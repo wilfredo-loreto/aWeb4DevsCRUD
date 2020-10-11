@@ -7,7 +7,7 @@ class DynamicContentText extends Component {
       <div className="blockContainer dynamicContentText">
       <div className="subtitleContainer">
         <h2 className="subtitle">Text</h2>
-        <img src="/icon/close.svg" />
+        <img  alt="close button" src="/icon/close.svg" onClick={(e)=>this.props.remove(this.props.key,e)}/>
       </div>
       <div className="colContainer">
         <div className="rowContainer">

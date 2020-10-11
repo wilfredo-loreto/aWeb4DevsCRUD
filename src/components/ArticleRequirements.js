@@ -21,11 +21,11 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Technology Type</h2>
-              <img src="/icon/close.svg" />
+              
             </div>
             <div className="colContainer">
               <div className="rowContainer">
-              <input checked={this.state.selectedTechType=="Frontend"}name="Frontend" onChange={this.handleTechType} type="radio" />
+              <input checked={this.state.selectedTechType=="Frontend"} name="Frontend" onChange={this.handleTechType} type="radio" />
 
                 <label className="label" for="isArticle">
                   Frontend
@@ -57,7 +57,7 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Title</h2>
-              <img src="/icon/close.svg" />
+              
             </div>
             <div className="colContainer">
               <div className="rowContainer">
@@ -68,7 +68,7 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Summary</h2>
-              <img src="/icon/close.svg" />
+              
             </div>
             <div className="colContainer">
               <div className="rowContainer">
@@ -79,7 +79,7 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Technologies</h2>
-              <img src="/icon/close.svg" />
+              
             </div>
             <div className="colContainer">
               <div className="rowContainer lessMargin">
@@ -102,7 +102,7 @@ class ArticleRequirements extends Component {
           <div className="blockContainer">
             <div className="subtitleContainer">
               <h2 className="subtitle">Tags</h2>
-              <img src="/icon/close.svg" />
+              
             </div>
             <div className="colContainer">
               <div className="rowContainer lessMargin">

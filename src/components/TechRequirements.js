@@ -18,7 +18,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Technology Type</h2>
-            <img src="/icon/close.svg" />
+          
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -49,7 +49,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Title</h2>
-            <img src="/icon/close.svg" />
+          
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -60,7 +60,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Summary</h2>
-            <img src="/icon/close.svg" />
+          
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -71,7 +71,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Image</h2>
-            <img src="/icon/close.svg" />
+          
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -91,7 +91,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Logo</h2>
-            <img src="/icon/close.svg" />
+          
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -112,7 +112,7 @@ class CreateDocument extends Component {
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Tags</h2>
-            <img src="/icon/close.svg" />
+          
           </div>
           <div className="colContainer">
             <div className="rowContainer lessMargin">
@@ -137,7 +137,7 @@ class CreateDocument extends Component {
             <h2 className="subtitle">
               Parent (Empty if this is already a Parent)
             </h2>
-            <img src="/icon/close.svg" />
+          
           </div>
           <div className="colContainer">
             <div className="rowContainer">

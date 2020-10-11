@@ -22,11 +22,11 @@ function App() {
        
         <Switch>
 
-        {  window.onbeforeunload = function preguntarAntesDeSalir()
+        {/* {  window.onbeforeunload = function preguntarAntesDeSalir()
     {
         return "¿Seguro que quieres salir?";
     }
-}
+} */}
 
           <Route path="/" exact>
 

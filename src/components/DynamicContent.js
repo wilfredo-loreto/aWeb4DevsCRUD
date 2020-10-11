@@ -8,23 +8,39 @@ import DynamicContentToolbar from "./DynamicContentToolbar";
 
 
 class DynamicContent extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      blocks:[],
+      toolBarOptions: [DynamicContentSubtitle,DynamicContentText,DynamicContentImage,DynamicContentList,DynamicContentReferences]
+    }
+  }
+    addBlock(position,event){
+      var pushedBlock = [...this.state.blocks]
+      pushedBlock.push(this.state.toolBarOptions[position])
+      this.setState({blocks:pushedBlock})
+     
+    }
+    removeBlock(position,event){
+      var removedBlock = [...this.state.blocks]
+      removedBlock.splice(position,1)
+      this.setState({blocks:removedBlock})
+    }
+  
   render() {
     return (
       <React.Fragment>
         <div className="mainContainer2">
-          <h1 className="title">CONTENT</h1>
-          <DynamicContentSubtitle />
-          <DynamicContentText/>
-          <DynamicContentImage/>
-          <DynamicContentList/>
-          <DynamicContentReferences/>
+          <h1 className="title" >CONTENT</h1>
+          {this.state.blocks.map((block,id)=>(React.createElement(block,{key:id,remove:this.removeBlock.bind(this,id)})))}
+       
           <input
             value="CREATE"
             type="button"
             className="createDocumentButton"
           />
         </div>
-        <DynamicContentToolbar/>
+        <DynamicContentToolbar pushBlock={this.addBlock.bind(this)}/>
       </React.Fragment>
     );
   }
