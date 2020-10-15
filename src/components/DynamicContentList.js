@@ -14,14 +14,17 @@ class DynamicContentList extends Component {
               <div className="rowContainer lessMargin">
                 <label className="numberlist">1.</label>
                 <input type="text" className="totalWidth" />
+                <img  src="/icon/close.svg" />
               </div>
               <div className="rowContainer lessMargin">
                 <label className="numberlist">2.</label>
                 <input type="text" className="totalWidth" />
+                <img  src="/icon/close.svg" />
               </div>
               <div className="rowContainer lessMargin">
                 <label className="numberlist">11.</label>
                 <input type="text" className="totalWidth" />
+                <img  src="/icon/close.svg" />
               </div>
               <div className="rowContainer lessMargin">
                 <div className="addNewItem totalWidth">

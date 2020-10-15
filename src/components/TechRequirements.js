@@ -8,10 +8,46 @@ class CreateDocument extends Component {
       selectedTechType: "",
     };
     this.handleTechType = this.handleTechType.bind(this);
+    this.handleInputs = this.handleInputs.bind(this);
+  }
+  setIds(parent,type){
+    var childs = parent.childNodes
+    var i=0
+    for(i=0;i<childs.length;i++){
+      childs[i].firstElementChild.setAttribute("id",type +" "+i)
+      console.log("im in for");
+    }
   }
   handleTechType(event) {
     this.setState({ selectedTechType: event.target.name });
   }
+  handleInputs(inputType,event){
+    var inputElement = document.createElement("input")
+    inputElement.setAttribute("type","text")
+    inputElement.setAttribute("class","lessWidth")
+
+    var container = document.createElement("div")
+    container.setAttribute("class","rowContainer lessMargin")
+   
+    
+    var parent = document.getElementById(inputType +"Container")
+    
+    var closeImg = document.createElement("img")
+    closeImg.setAttribute("src","/icon/close.svg")
+    closeImg.addEventListener("click",deleteInput.bind(this))
+    
+    container.appendChild(inputElement)
+    container.appendChild(closeImg)
+    parent.appendChild(container)
+    this.setIds(parent,inputType)
+
+    function deleteInput(event){
+      parent.removeChild(event.currentTarget.parentNode)
+      this.setIds(parent,inputType)
+    }
+
+  }
+  
   render() {
     return (
       <React.Fragment>
@@ -109,22 +145,13 @@ class CreateDocument extends Component {
             </div>
           </div>
         </div>
-        <div className="blockContainer">
+        <div className="blockContainer" >
           <div className="subtitleContainer">
-            <h2 className="subtitle">Tags</h2>
+            <h2 className="subtitle">Tags (Keywords for Search Bar)</h2>
           
           </div>
-          <div className="colContainer">
-            <div className="rowContainer lessMargin">
-              <input type="text" className="lessWidth" />
-            </div>
-            <div className="rowContainer lessMargin">
-              <input type="text" className="lessWidth" />
-            </div>
-            <div className="rowContainer lessMargin">
-              <input type="text" className="lessWidth" />
-            </div>
-            <div className="rowContainer lessMargin">
+          <div className="colContainer"id="tagsContainer">
+            <div className="rowContainer lessMargin lastItem" onClick={(e)=>{this.handleInputs("tags",e)}}>
               <div className="addNewItem ">
                 <img src="/icon/plus.svg" className="plusImage" />
                 <span>ADD NEW TAG</span>
