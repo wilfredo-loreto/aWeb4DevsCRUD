@@ -10,6 +10,7 @@ class CreateDocument extends Component {
     this.state = {
       displayBlocks: "",
       selectedDocType: "",
+      newDoc: {}
     };
     this.handleBlocks = this.handleBlocks.bind(this);
     this.handleDocType = this.handleDocType.bind(this);
@@ -19,6 +20,10 @@ class CreateDocument extends Component {
   }
   handleDocType(event) {
     this.setState({ selectedDocType: event.target.name });
+  }
+
+  newDocData(){
+
   }
 
   render() {

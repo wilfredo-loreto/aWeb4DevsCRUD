@@ -28,13 +28,24 @@ $black: #2e2f2f;
     margin-bottom: 50px;
     text-decoration: none;
     user-select: none;
+    transition: 400ms;
 
     h3 {
       font-size: 50px;
+      transition: 400ms;
     }
 
     h4 {
       font-size: 100px;
+      transition: 400ms;
+    }
+
+    &:hover{
+      background-color: $main-color;
+     
+      h3, h4{
+        color: $background-color;
+      }
     }
   }
 

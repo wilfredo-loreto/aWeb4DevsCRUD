@@ -6,15 +6,75 @@ class ArticleRequirements extends Component {
         super(props);
         this.state = {
           selectedTechType: "",
+          newDocInfo: {
+            title: "",
+            type: "",
+            summary: "",
+            technologies: [],
+            tags: [],
+            dinamicContent: []
+            
+          },
+        
         };
         this.handleTechType = this.handleTechType.bind(this);
+        this.handleTitle = this.handleTitle.bind(this)
+        this.handleSummary = this.handleSummary.bind(this)
+        this.handleTechnologies = this.handleTechnologies.bind(this)
+        this.handleTags = this.handleTags.bind(this)
+
       }
       handleTechType(event){
-        this.setState({selectedTechType:event.target.name})
+        
+
+        var docInfo = this.state.newDocInfo
+
+        docInfo.type = event.target.name
+
+        this.setState({selectedTechType:event.target.name, newDocInfo: docInfo })
+
+
       }
 
+      handleTitle(event){
+        var docInfo = this.state.newDocInfo
+
+        docInfo.title = event.target.value
+
+        this.setState({newDocInfo: docInfo})
+      }
       
+
+      handleSummary(event){
+        var docInfo = this.state.newDocInfo
+
+        docInfo.summary = event.target.value
+
+        this.setState({newDocInfo: docInfo})
+      }
+
+      handleTechnologies(event){
+        var docInfo = this.state.newDocInfo
+
+        docInfo.technologies[event.target.id] = event.target.value
+  
+        this.setState({newDocInfo: docInfo})
+      }
+
+      handleTags(event){
+        var docInfo = this.state.newDocInfo
+
+        docInfo.tags[event.target.id] = event.target.value
+
+        this.setState({newDocInfo: docInfo})
+      }
+
+   
+
   render() {
+    
+    console.log(this.state.newDocInfo)
+    
       return(
 
           <React.Fragment>
@@ -61,7 +121,7 @@ class ArticleRequirements extends Component {
             </div>
             <div className="colContainer">
               <div className="rowContainer">
-                <input type="text" className="lessWidth"/>
+                <input type="text" onChange={this.handleTitle} className="lessWidth"/>
               </div>
             </div>
           </div>
@@ -72,7 +132,7 @@ class ArticleRequirements extends Component {
             </div>
             <div className="colContainer">
               <div className="rowContainer">
-                <input type="text" className="totalWidth"/>
+                <input type="text" onChange={this.handleSummary} className="totalWidth"/>
               </div>
             </div>
           </div>
@@ -83,13 +143,13 @@ class ArticleRequirements extends Component {
             </div>
             <div className="colContainer">
               <div className="rowContainer lessMargin">
-                <input type="text" className="lessWidth"/>
+                <input type="text" id={0} onChange={this.handleTechnologies} className="lessWidth"/>
               </div>
               <div className="rowContainer lessMargin">
-                <input type="text" className="lessWidth"/>
+                <input type="text" id={1} onChange={this.handleTechnologies} className="lessWidth"/>
               </div>
               <div className="rowContainer lessMargin">
-                <input type="text" className="lessWidth"/>
+                <input type="text" id={2} onChange={this.handleTechnologies} className="lessWidth"/>
               </div>
               <div className="rowContainer lessMargin">
                 <div className="addNewItem">
@@ -106,13 +166,13 @@ class ArticleRequirements extends Component {
             </div>
             <div className="colContainer">
               <div className="rowContainer lessMargin">
-                <input type="text" className="lessWidth"/>
+                <input type="text" id={0} onChange={this.handleTags} className="lessWidth"/>
               </div>
               <div className="rowContainer lessMargin">
-                <input type="text" className="lessWidth"/>
+                <input type="text" id={1} onChange={this.handleTags} className="lessWidth"/>
               </div>
               <div className="rowContainer lessMargin">
-                <input type="text" className="lessWidth"/>
+                <input type="text" id={2} onChange={this.handleTags} className="lessWidth"/>
               </div>
               <div className="rowContainer lessMargin">
                 <div className="addNewItem">
