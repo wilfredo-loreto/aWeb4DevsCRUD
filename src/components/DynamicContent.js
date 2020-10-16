@@ -32,7 +32,7 @@ class DynamicContent extends Component {
       <React.Fragment>
         <div className="mainContainer2">
           <h1 className="title" >CONTENT</h1>
-          {this.state.blocks.map((block,id)=>(React.createElement(block,{key:id,remove:this.removeBlock.bind(this,id)})))}
+          {this.state.blocks.map((block,id)=>(React.createElement(block,{key:id,order:id,remove:this.removeBlock.bind(this,id)})))}
        
           <input
             value="CREATE"

@@ -10,17 +10,17 @@ class CreateDocument extends Component {
     this.handleTechType = this.handleTechType.bind(this);
     this.handleInputs = this.handleInputs.bind(this);
   }
-  setIds(parent,type){
-    var childs = parent.childNodes
-    var i=0
-    for(i=0;i<childs.length;i++){
-      childs[i].firstElementChild.setAttribute("id",type +" "+i)
-      console.log("im in for");
-    }
-  }
   handleTechType(event) {
     this.setState({ selectedTechType: event.target.name });
   }
+        setIds(parent,type){
+          var childs = parent.childNodes
+          var i=0
+          for(i=1;i<childs.length;i++){
+            childs[i].firstElementChild.setAttribute("id",type +" "+i)
+            console.log("im in for");
+          }
+        }
   handleInputs(inputType,event){
     var inputElement = document.createElement("input")
     inputElement.setAttribute("type","text")
@@ -150,8 +150,8 @@ class CreateDocument extends Component {
             <h2 className="subtitle">Tags (Keywords for Search Bar)</h2>
           
           </div>
-          <div className="colContainer"id="tagsContainer">
-            <div className="rowContainer lessMargin lastItem" onClick={(e)=>{this.handleInputs("tags",e)}}>
+          <div className="colContainer"id="tagContainer">
+            <div className="rowContainer lessMargin lastItem" onClick={(e)=>{this.handleInputs("tag",e)}}>
               <div className="addNewItem ">
                 <img src="/icon/plus.svg" className="plusImage" />
                 <span>ADD NEW TAG</span>

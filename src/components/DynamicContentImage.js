@@ -6,8 +6,8 @@ class DynamicContentImage extends Component {
     return (
       <div className="blockContainer dynamicContentImage">
             <div className="subtitleContainer">
-              <h2 className="subtitle">Image</h2>
-              <img alt="close button" src="/icon/close.svg"onClick={(e)=>this.props.remove(this.props.key,e)} />
+    <h2 className="subtitle">#{this.props.order} Image </h2>
+              <img alt="close button" src="/icon/close.svg"onClick={(e)=>this.props.remove(this.props.order,e)} />
             </div>
             <div className="colContainer">
               <div className="rowContainer">
