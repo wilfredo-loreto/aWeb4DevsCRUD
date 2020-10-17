@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./CreateDocument.scss";
 
 class DynamicContentImage extends Component {
+  componentDidMount(){
+    console.log(this.props.order);
+  }
   render() {
     return (
       <div className="blockContainer dynamicContentImage">

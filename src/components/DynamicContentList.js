@@ -30,7 +30,7 @@ class DynamicContentList extends Component {
     var container = document.createElement("div");
     container.setAttribute("class", "rowContainer lessMargin");
 
-    var parent = document.getElementById(this.props.order + "listContainer");
+    var parent = document.getElementById(order + "listContainer");
 
     var closeImg = document.createElement("img");
     closeImg.setAttribute("src", "/icon/close.svg");
@@ -50,13 +50,6 @@ class DynamicContentList extends Component {
     function deleteInput(event) {
       parent.removeChild(event.currentTarget.parentNode);
       this.setIds(parent, inputType);
-    }
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.number === nextProps.number) {
-      return false;
-    } else {
-      return true;
     }
   }
   render() {
