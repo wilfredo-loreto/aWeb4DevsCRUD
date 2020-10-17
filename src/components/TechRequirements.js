@@ -34,11 +34,13 @@ class CreateDocument extends Component {
     
     var closeImg = document.createElement("img")
     closeImg.setAttribute("src","/icon/close.svg")
-    closeImg.addEventListener("click",deleteInput.bind(this))
-    
+    inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
+      this.handleInputs(inputType,e)
+    }})
     container.appendChild(inputElement)
     container.appendChild(closeImg)
     parent.appendChild(container)
+    inputElement.focus()
     this.setIds(parent,inputType)
 
     function deleteInput(event){

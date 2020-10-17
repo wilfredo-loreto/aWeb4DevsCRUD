@@ -62,9 +62,16 @@ class DynamicContentReferences extends Component {
       container.appendChild(link);
     }
 
-    container.appendChild(inputElement);
-    container.appendChild(closeImg);
+    inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
+      this.handleInputs(inputType,order,e)
+    }})
+    inputElement2.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
+      this.handleInputs(inputType,order,e)
+    }})
+    container.appendChild(inputElement)
+    container.appendChild(closeImg)
     parent.appendChild(container);
+    inputElement2.focus();
     this.setIds(parent, inputType);
 
     function deleteInput(event) {

@@ -23,21 +23,24 @@ class ArticleRequirements extends Component {
   }
   handleInputs(inputType,event){
     var inputElement = document.createElement("input")
+    
     var container = document.createElement("div")
     var parent = document.getElementById(inputType +"Container")
     var closeImg = document.createElement("img")
     inputElement.setAttribute("type","text")
     inputElement.setAttribute("class","lessWidth")
     container.setAttribute("class","rowContainer lessMargin")
-
+    
     closeImg.setAttribute("src","/icon/close.svg")
     closeImg.addEventListener("click",deleteInput.bind(this))
-    
+    inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
+      this.handleInputs(inputType,e)
+    }})
     container.appendChild(inputElement)
     container.appendChild(closeImg)
     parent.appendChild(container)
     this.setIds(parent,inputType)
-
+    inputElement.focus() 
     function deleteInput(event){
       parent.removeChild(event.currentTarget.parentNode)
       this.setIds(parent,inputType)
