@@ -10,10 +10,15 @@ class CreateDocument extends Component {
     this.state = {
       displayBlocks: "",
       selectedDocType: "",
-      newDoc: {}
+      newDoc: {
+        content: []
+      }
+
     };
     this.handleBlocks = this.handleBlocks.bind(this);
     this.handleDocType = this.handleDocType.bind(this);
+    this.newDocData = this.newDocData.bind(this);
+    this.dynamicContent = this.dynamicContent.bind(this);
   }
   handleBlocks(docType) {
     this.setState({ displayBlocks: docType });
@@ -22,11 +27,53 @@ class CreateDocument extends Component {
     this.setState({ selectedDocType: event.target.name });
   }
 
-  newDocData(){
+  newDocData(newDocInfo){
+
+
+    if(this.state.selectedDocType == "article"){
+
+      var newArticle = {
+        title: newDocInfo.title,
+        type: newDocInfo.type,
+        summary: newDocInfo.summary,
+        technologies: newDocInfo.technologies,
+        tags: newDocInfo.tags,
+        content: this.state.newDoc.content
+      }
+
+      this.setState({newDoc: newArticle})
+
+    }else{
+
+      var newtech = {
+        title: newDocInfo.title,
+        type: newDocInfo.type,
+        summary: newDocInfo.summary,
+        tags: newDocInfo.tags,
+        parent: newDocInfo.parent,
+        content:  this.state.newDoc.content
+      }
+
+      this.setState({newDoc: newtech})
+
+    }
+
+  }
+
+  dynamicContent(content){
+
+    var newDoc = this.state.newDoc
+
+    newDoc.content = content
+
+    this.setState({newDoc: newDoc})
 
   }
 
   render() {
+
+    console.log(this.state.newDoc);
+
     return (
   
         <form className="form">
@@ -66,14 +113,14 @@ class CreateDocument extends Component {
               </div>
             </div>
             {this.state.displayBlocks == "article" ? (
-              <ArticleRequirements />
+              <ArticleRequirements newDocData={this.newDocData} />
               ) : this.state.displayBlocks == "tech" ? (
-                <TechRequirements />
+                <TechRequirements newDocData={this.newDocData} />
                 ) : null}
           </div>
         </div>
         {this.state.displayBlocks!=""?(
-          <DynamicContent/>
+          <DynamicContent dynamicContent={this.dynamicContent}  />
         ):null}
        
       </form>

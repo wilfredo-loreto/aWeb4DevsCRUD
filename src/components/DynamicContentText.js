@@ -2,6 +2,26 @@ import React, { Component } from "react";
 import "./CreateDocument.scss";
 
 class DynamicContentText extends Component {
+  constructor(props){
+    super(props);
+
+    this.handleText= this.handleText.bind(this);
+
+  }
+
+  handleText(event){
+
+
+
+    var text = {
+      type: "text",
+      content: event.target.value.split("\n\n")
+    }
+
+    this.props.addDynamicContent(text, this.props.order)
+
+
+  }
   render() {
     return (
       <div className="blockContainer dynamicContentText">
@@ -11,7 +31,7 @@ class DynamicContentText extends Component {
       </div>
       <div className="colContainer">
         <div className="rowContainer">
-          <textarea className="totalWidth textarea" />
+          <textarea onChange={this.handleText} className="totalWidth textarea" />
         </div>
       </div>
     </div>

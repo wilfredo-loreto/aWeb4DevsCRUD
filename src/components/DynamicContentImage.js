@@ -5,6 +5,14 @@ class DynamicContentImage extends Component {
   componentDidMount(){
     console.log(this.props.order);
   }
+
+  handleImg(event){
+
+    console.log(event.target.value)
+
+  }
+
+
   render() {
     return (
       <div className="blockContainer dynamicContentImage">
@@ -17,7 +25,8 @@ class DynamicContentImage extends Component {
                 <input
                   type="file"
                   className="submitButton"
-                  accept="image/png, image/jpg"
+                  onChange={this.handleImg}
+                  accept="image/png image/jpg"
                 />
                 <input
                   type="text"

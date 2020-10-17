@@ -11,8 +11,7 @@ class ArticleRequirements extends Component {
             type: "",
             summary: "",
             technologies: [],
-            tags: [],
-            dinamicContent: []
+            tags: []
             
           },
         
@@ -30,6 +29,8 @@ class ArticleRequirements extends Component {
 
         this.setState({selectedTechType:event.target.name, newDocInfo: docInfo })
 
+        this.props.newDocData(this.state.newDocInfo);
+
       }
 
       handleTitle(event){
@@ -38,6 +39,8 @@ class ArticleRequirements extends Component {
         docInfo.title = event.target.value
 
         this.setState({newDocInfo: docInfo})
+
+        this.props.newDocData(this.state.newDocInfo);
       }
       
 
@@ -47,6 +50,8 @@ class ArticleRequirements extends Component {
         docInfo.summary = event.target.value
 
         this.setState({newDocInfo: docInfo})
+
+        this.props.newDocData(this.state.newDocInfo);
       }
    
   setIds(parent,type) {
@@ -118,6 +123,8 @@ class ArticleRequirements extends Component {
       }
   
     }
+
+    this.props.newDocData(this.state.newDocInfo);
 
   }
   

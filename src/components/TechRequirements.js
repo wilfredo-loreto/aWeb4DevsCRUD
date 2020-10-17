@@ -12,8 +12,7 @@ class CreateDocument extends Component {
         type: "",
         summary: "",
         tags: [],
-        parent: "",
-        dinamicContent: [],
+        parent: ""
         
       },
     };
@@ -30,6 +29,8 @@ class CreateDocument extends Component {
 
     this.setState({selectedTechType:event.target.name, newDocInfo: docInfo })
 
+    this.props.newDocData(this.state.newDocInfo);
+
   }
 
   handleTitle(event){
@@ -38,6 +39,8 @@ class CreateDocument extends Component {
     docInfo.title = event.target.value
 
     this.setState({newDocInfo: docInfo})
+
+    this.props.newDocData(this.state.newDocInfo);
   }
   
   handleSummary(event){
@@ -46,6 +49,8 @@ class CreateDocument extends Component {
     docInfo.summary = event.target.value
 
     this.setState({newDocInfo: docInfo})
+
+    this.props.newDocData(this.state.newDocInfo);
   }
 
   handleParent(event){
@@ -54,6 +59,8 @@ class CreateDocument extends Component {
     docInfo.parent = event.target.value
 
     this.setState({newDocInfo: docInfo})
+
+    this.props.newDocData(this.state.newDocInfo);
   }
 
 
@@ -105,6 +112,8 @@ class CreateDocument extends Component {
         this.setState({newDocInfo: docInfo})
     
     }
+
+    this.props.newDocData(this.state.newDocInfo);
 
   }
   
