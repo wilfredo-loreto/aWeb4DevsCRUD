@@ -20,19 +20,15 @@ class ArticleRequirements extends Component {
         this.handleTechType = this.handleTechType.bind(this);
         this.handleTitle = this.handleTitle.bind(this)
         this.handleSummary = this.handleSummary.bind(this)
-        this.handleTechnologies = this.handleTechnologies.bind(this)
-        this.handleTags = this.handleTags.bind(this)
-
+       
       }
       handleTechType(event){
         
-
         var docInfo = this.state.newDocInfo
 
         docInfo.type = event.target.name
 
         this.setState({selectedTechType:event.target.name, newDocInfo: docInfo })
-
 
       }
 
@@ -52,138 +48,186 @@ class ArticleRequirements extends Component {
 
         this.setState({newDocInfo: docInfo})
       }
-
-      handleTechnologies(event){
-        var docInfo = this.state.newDocInfo
-
-        docInfo.technologies[event.target.id] = event.target.value
-  
-        this.setState({newDocInfo: docInfo})
-      }
-
-      handleTags(event){
-        var docInfo = this.state.newDocInfo
-
-        docInfo.tags[event.target.id] = event.target.value
-
-        this.setState({newDocInfo: docInfo})
-      }
-
    
+  setIds(parent,type) {
+    var childs = parent.childNodes;
+    var i = 0;
+    for (i = 1; i < childs.length; i++) {
+      childs[i].firstElementChild.setAttribute("id", type+ " " + i);
+      console.log("im in for");
+    }
+  }
+  handleInputs(inputType,event){
+    var inputElement = document.createElement("input")
+    var container = document.createElement("div")
+    var parent = document.getElementById(inputType +"Container")
+    var closeImg = document.createElement("img")
+    inputElement.setAttribute("type","text")
+    inputElement.setAttribute("class","lessWidth")
+    container.setAttribute("class","rowContainer lessMargin")
 
+    closeImg.setAttribute("src","/icon/close.svg")
+    closeImg.addEventListener("click",deleteInput.bind(this))
+    
+    container.appendChild(inputElement)
+    container.appendChild(closeImg)
+    parent.appendChild(container)
+    this.setIds(parent,inputType)
+
+    if(inputType == "tag"){
+
+      inputElement.addEventListener("input", () => {
+        var docInfo = this.state.newDocInfo
+   
+          docInfo.tags[inputElement.id.split(" ")[1] - 1] = inputElement.value
+  
+          this.setState({newDocInfo: docInfo})
+      })
+
+    }else{
+      
+      inputElement.addEventListener("input", () => {
+        var docInfo = this.state.newDocInfo
+
+          docInfo.technologies[inputElement.id.split(" ")[1] - 1] = inputElement.value
+  
+          this.setState({newDocInfo: docInfo})
+      })
+    }
+
+    function deleteInput(event){
+      parent.removeChild(event.currentTarget.parentNode)
+      this.setIds(parent,inputType)
+
+      if(inputType == "tag"){
+
+          var docInfo = this.state.newDocInfo
+     
+          docInfo.tags.splice(inputElement.id.split(" ")[1] - 1,1)
+    
+            this.setState({newDocInfo: docInfo})
+        
+      }else{
+        
+          var docInfo = this.state.newDocInfo
+  
+            docInfo.technologies.splice(inputElement.id.split(" ")[1] - 1,1)
+    
+            this.setState({newDocInfo: docInfo})
+    
+      }
+  
+    }
+
+  }
+  
   render() {
-    
     console.log(this.state.newDocInfo)
-    
-      return(
+    return (
+      <React.Fragment>
+        <div className="blockContainer">
+          <div className="subtitleContainer">
+            <h2 className="subtitle">Technology Type</h2>
+          </div>
+          <div className="colContainer">
+            <div className="rowContainer">
+              <input
+                checked={this.state.selectedTechType == "Frontend"}
+                name="Frontend"
+                onChange={this.handleTechType}
+                type="radio"
+              />
 
-          <React.Fragment>
-          <div className="blockContainer">
-            <div className="subtitleContainer">
-              <h2 className="subtitle">Technology Type</h2>
-              <img src="/icon/close.svg" />
+              <label className="label" for="isArticle">
+                Frontend
+              </label>
             </div>
-            <div className="colContainer">
-              <div className="rowContainer">
-              <input checked={this.state.selectedTechType=="Frontend"}name="Frontend" onChange={this.handleTechType} type="radio" />
+            <div className="rowContainer">
+              <input
+                checked={this.state.selectedTechType == "Backend"}
+                name="Backend"
+                onChange={this.handleTechType}
+                type="radio"
+              />
 
-                <label className="label" for="isArticle">
-                  Frontend
-                </label>
-              </div>
-              <div className="rowContainer">
-              <input checked={this.state.selectedTechType=="Backend"}name="Backend" onChange={this.handleTechType} type="radio" />
+              <label className="label" for="isArticle">
+                Backend
+              </label>
+            </div>
+            <div className="rowContainer">
+              <input
+                checked={this.state.selectedTechType == "Mixed"}
+                name="Mixed"
+                onChange={this.handleTechType}
+                type="radio"
+              />
 
-                <label className="label" for="isArticle">
-                  Backend
-                </label>
-              </div>
-              <div className="rowContainer">
-              <input checked={this.state.selectedTechType=="Mixed"}name="Mixed" onChange={this.handleTechType} type="radio" />
+              <label className="label" for="isArticle">
+                Mixed
+              </label>
+            </div>
+            <div className="rowContainer">
+              <input
+                checked={this.state.selectedTechType == "None"}
+                name="None"
+                onChange={this.handleTechType}
+                type="radio"
+              />
 
-                <label className="label" for="isArticle">
-                  Mixed
-                </label>
-              </div>
-              <div className="rowContainer">
-              <input checked={this.state.selectedTechType=="None"}name="None" onChange={this.handleTechType} type="radio" />
-
-                <label className="label" for="isArticle">
-                  None
-                </label>
-              </div>
+              <label className="label" for="isArticle">
+                None
+              </label>
             </div>
           </div>
-          <div className="blockContainer">
-            <div className="subtitleContainer">
-              <h2 className="subtitle">Title</h2>
-              <img src="/icon/close.svg" />
-            </div>
-            <div className="colContainer">
-              <div className="rowContainer">
-                <input type="text" onChange={this.handleTitle} className="lessWidth"/>
-              </div>
+        </div>
+        <div className="blockContainer">
+          <div className="subtitleContainer">
+            <h2 className="subtitle">Title</h2>
+          </div>
+          <div className="colContainer">
+            <div className="rowContainer">
+              <input type="text"  onChange={this.handleTitle} className="lessWidth" />
             </div>
           </div>
-          <div className="blockContainer">
-            <div className="subtitleContainer">
-              <h2 className="subtitle">Summary</h2>
-              <img src="/icon/close.svg" />
-            </div>
-            <div className="colContainer">
-              <div className="rowContainer">
-                <input type="text" onChange={this.handleSummary} className="totalWidth"/>
-              </div>
+        </div>
+        <div className="blockContainer">
+          <div className="subtitleContainer">
+            <h2 className="subtitle">Summary</h2>
+          </div>
+          <div className="colContainer">
+            <div className="rowContainer">
+              <input type="text" onChange={this.handleSummary} className="totalWidth" />
             </div>
           </div>
-          <div className="blockContainer">
-            <div className="subtitleContainer">
-              <h2 className="subtitle">Technologies</h2>
-              <img src="/icon/close.svg" />
-            </div>
-            <div className="colContainer">
-              <div className="rowContainer lessMargin">
-                <input type="text" id={0} onChange={this.handleTechnologies} className="lessWidth"/>
-              </div>
-              <div className="rowContainer lessMargin">
-                <input type="text" id={1} onChange={this.handleTechnologies} className="lessWidth"/>
-              </div>
-              <div className="rowContainer lessMargin">
-                <input type="text" id={2} onChange={this.handleTechnologies} className="lessWidth"/>
-              </div>
-              <div className="rowContainer lessMargin">
-                <div className="addNewItem">
-                <img src="/icon/plus.svg" className="plusImage"/>
+        </div>
+        <div className="blockContainer">
+          <div className="subtitleContainer">
+            <h2 className="subtitle">Technologies</h2>
+          </div>
+          <div className="colContainer" id="technologyContainer">
+            <div className="rowContainer lessMargin lastItem" onClick={(e)=>this.handleInputs("technology",e)}>
+              <div className="addNewItem">
+                <img src="/icon/plus.svg" className="plusImage" />
                 <span>ADD NEW TECHNOLOGY</span>
-                </div>
               </div>
             </div>
           </div>
-          <div className="blockContainer">
-            <div className="subtitleContainer">
-              <h2 className="subtitle">Tags</h2>
-              <img src="/icon/close.svg" />
-            </div>
-            <div className="colContainer">
-              <div className="rowContainer lessMargin">
-                <input type="text" id={0} onChange={this.handleTags} className="lessWidth"/>
-              </div>
-              <div className="rowContainer lessMargin">
-                <input type="text" id={1} onChange={this.handleTags} className="lessWidth"/>
-              </div>
-              <div className="rowContainer lessMargin">
-                <input type="text" id={2} onChange={this.handleTags} className="lessWidth"/>
-              </div>
-              <div className="rowContainer lessMargin">
-                <div className="addNewItem">
-                <img src="/icon/plus.svg" className="plusImage"/>
+        </div>
+        <div className="blockContainer">
+          <div className="subtitleContainer">
+            <h2 className="subtitle">Tags</h2>
+          </div>
+          <div className="colContainer" id="tagContainer">
+            <div className="rowContainer lessMargin lastItem" onClick={(e)=>this.handleInputs("tag",e)}>
+              <div className="addNewItem">
+                <img src="/icon/plus.svg" className="plusImage" />
                 <span>ADD NEW TAG</span>
-                </div>
               </div>
             </div>
           </div>
+        </div>
       </React.Fragment>
-  )
+    );
   }
 }
 
