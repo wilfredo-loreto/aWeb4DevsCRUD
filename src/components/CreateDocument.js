@@ -63,14 +63,13 @@ class CreateDocument extends Component {
 
     if (this.state.selectedDocType == "article") {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
-    } else if (this.state.selectedDocType == "tech") {
-      url = "http://aweb4devsapi.herokuapp.com/save-tech";
     } else {
-      return "error. no doctype selected";
+      url = "http://aweb4devsapi.herokuapp.com/save-tech";
     }
     axios.post(url, newDoc).then((res) => {
-      console.log(res), console.log(res.data);
-    }).catch((err)=>{console.log("Error during axios request: "+ err);});
+      console.log(res) 
+      console.log(res.data);
+    }).catch((err)=>{console.log("Error during axios request: "+ err)});
   }
 
   render() {
