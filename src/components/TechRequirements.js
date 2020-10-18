@@ -88,6 +88,7 @@ class CreateDocument extends Component {
     inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
       this.handleInputs(inputType,e)
     }})
+    closeImg.addEventListener("click",deleteInput.bind(this))
     container.appendChild(inputElement)
     container.appendChild(closeImg)
     parent.appendChild(container)
