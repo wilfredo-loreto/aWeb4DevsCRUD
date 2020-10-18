@@ -13,6 +13,7 @@ class CreateDocument extends Component {
       selectedDocType: "",
       newDoc: {
         content: [],
+        images: []
       },
     };
     this.handleBlocks = this.handleBlocks.bind(this);
@@ -33,9 +34,11 @@ class CreateDocument extends Component {
         title: newDocInfo.title,
         type: newDocInfo.type,
         summary: newDocInfo.summary,
+        img: newDocInfo.img,
         technologies: newDocInfo.technologies,
         tags: newDocInfo.tags,
         content: this.state.newDoc.content,
+        images: []
       };
 
       this.setState({ newDoc: newArticle });
@@ -44,9 +47,12 @@ class CreateDocument extends Component {
         title: newDocInfo.title,
         type: newDocInfo.type,
         summary: newDocInfo.summary,
+        img: newDocInfo.img,
+        logo: newDocInfo.logo,
         tags: newDocInfo.tags,
         parent: newDocInfo.parent,
         content: this.state.newDoc.content,
+        images: []
       };
 
       this.setState({ newDoc: newtech });
