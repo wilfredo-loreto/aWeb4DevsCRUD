@@ -6,7 +6,10 @@ class DynamicContentList extends Component {
     super(props);
 
     this.state = {
-      list: []
+      list: {
+        type: "list",
+        content: []
+      }
     }
 
 
@@ -60,7 +63,7 @@ class DynamicContentList extends Component {
     inputElement.addEventListener("input", () => {
       var docInfo = this.state.list
  
-        docInfo[inputElement.id.split("item")[1] - 1] = inputElement.value
+        docInfo.content[inputElement.id.split("item")[1] - 1] = inputElement.value
 
         this.setState({list: docInfo})
         
@@ -72,7 +75,7 @@ class DynamicContentList extends Component {
 
       var docInfo = this.state.list
  
-      docInfo.splice(inputElement.id.split("item")[1] - 1,1)
+      docInfo.content.splice(inputElement.id.split("item")[1] - 1,1)
 
       this.setState({list: docInfo})
     }

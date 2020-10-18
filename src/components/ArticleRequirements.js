@@ -9,6 +9,7 @@ class ArticleRequirements extends Component {
           newDocInfo: {
             title: "",
             type: "",
+            img: "",
             summary: "",
             technologies: [],
             tags: []
@@ -19,6 +20,7 @@ class ArticleRequirements extends Component {
         this.handleTechType = this.handleTechType.bind(this);
         this.handleTitle = this.handleTitle.bind(this)
         this.handleSummary = this.handleSummary.bind(this)
+        this.handleImg = this.handleImg.bind(this)
        
       }
       handleTechType(event){
@@ -40,6 +42,16 @@ class ArticleRequirements extends Component {
 
         this.setState({newDocInfo: docInfo})
 
+        this.props.newDocData(this.state.newDocInfo);
+      }
+
+      handleImg(event){
+        var docInfo = this.state.newDocInfo
+    
+        docInfo.img = event.target.files[0].name
+    
+        this.setState({newDocInfo: docInfo})
+    
         this.props.newDocData(this.state.newDocInfo);
       }
       
@@ -218,9 +230,10 @@ class ArticleRequirements extends Component {
           <div className="colContainer">
             <div className="rowContainer">
               <input
+                onChange={this.handleImg}
                 type="file"
                 className="submitButton"
-                accept="image/png, image/jpg"
+                accept="image/*"
               />
               <input
                 type="text"

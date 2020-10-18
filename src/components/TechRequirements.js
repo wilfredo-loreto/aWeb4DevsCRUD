@@ -10,6 +10,8 @@ class CreateDocument extends Component {
       newDocInfo: {
         title: "",
         type: "",
+        logo: "",
+        img: "",
         summary: "",
         tags: [],
         parent: ""
@@ -20,6 +22,8 @@ class CreateDocument extends Component {
     this.handleTitle = this.handleTitle.bind(this)
     this.handleSummary = this.handleSummary.bind(this)
     this.handleParent = this.handleParent.bind(this)
+    this.handleImg = this.handleImg.bind(this)
+    this.handleLogo = this.handleLogo.bind(this)
   }
   handleTechType(event){
     
@@ -31,6 +35,27 @@ class CreateDocument extends Component {
 
     this.props.newDocData(this.state.newDocInfo);
 
+  }
+
+  handleImg(event){
+    var docInfo = this.state.newDocInfo
+
+    docInfo.img = event.target.files[0].name
+
+    this.setState({newDocInfo: docInfo})
+
+    this.props.newDocData(this.state.newDocInfo);
+  }
+
+  
+  handleLogo(event){
+    var docInfo = this.state.newDocInfo
+
+    docInfo.logo = event.target.files[0].name
+
+    this.setState({newDocInfo: docInfo})
+
+    this.props.newDocData(this.state.newDocInfo);
   }
 
   handleTitle(event){
@@ -188,8 +213,9 @@ class CreateDocument extends Component {
             <div className="rowContainer">
               <input
                 type="file"
+                onChange={this.handleImg}
                 className="submitButton"
-                accept="image/png, image/jpg"
+                accept="image/*"
               />
               <input
                 type="text"
@@ -207,6 +233,7 @@ class CreateDocument extends Component {
           <div className="colContainer">
             <div className="rowContainer">
               <input
+                onChange={this.handleLogo}
                 type="file"
                 className="submitButton"
                 accept="image/png, image/jpg"
