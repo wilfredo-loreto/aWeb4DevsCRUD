@@ -4,6 +4,12 @@ import "./CreateDocument.scss";
 class DynamicContentList extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      list: []
+    }
+
+
     this.handleInputs = this.handleInputs.bind(this);
     this.setIds = this.setIds.bind(this);
   }
@@ -51,10 +57,28 @@ class DynamicContentList extends Component {
     inputElement.focus();
     this.setIds(parent, inputType);
 
+    inputElement.addEventListener("input", () => {
+      var docInfo = this.state.list
+ 
+        docInfo[inputElement.id.split("item")[1] - 1] = inputElement.value
+
+        this.setState({list: docInfo})
+        
+    })
+
     function deleteInput(event) {
       parent.removeChild(event.currentTarget.parentNode);
       this.setIds(parent, inputType);
+
+      var docInfo = this.state.list
+ 
+      docInfo.splice(inputElement.id.split("item")[1] - 1,1)
+
+      this.setState({list: docInfo})
     }
+
+    this.props.addDynamicContent(this.state.list, this.props.order)
+
   }
   render() {
     return (

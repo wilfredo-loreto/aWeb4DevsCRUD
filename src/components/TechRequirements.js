@@ -6,13 +6,64 @@ class CreateDocument extends Component {
     super(props);
     this.state = {
       selectedTechType: "",
+      
+      newDocInfo: {
+        title: "",
+        type: "",
+        summary: "",
+        tags: [],
+        parent: ""
+        
+      },
     };
     this.handleTechType = this.handleTechType.bind(this);
-    this.handleInputs = this.handleInputs.bind(this);
+    this.handleTitle = this.handleTitle.bind(this)
+    this.handleSummary = this.handleSummary.bind(this)
+    this.handleParent = this.handleParent.bind(this)
   }
-  handleTechType(event) {
-    this.setState({ selectedTechType: event.target.name });
+  handleTechType(event){
+    
+    var docInfo = this.state.newDocInfo
+
+    docInfo.type = event.target.name
+
+    this.setState({selectedTechType:event.target.name, newDocInfo: docInfo })
+
+    this.props.newDocData(this.state.newDocInfo);
+
   }
+
+  handleTitle(event){
+    var docInfo = this.state.newDocInfo
+
+    docInfo.title = event.target.value
+
+    this.setState({newDocInfo: docInfo})
+
+    this.props.newDocData(this.state.newDocInfo);
+  }
+  
+  handleSummary(event){
+    var docInfo = this.state.newDocInfo
+
+    docInfo.summary = event.target.value
+
+    this.setState({newDocInfo: docInfo})
+
+    this.props.newDocData(this.state.newDocInfo);
+  }
+
+  handleParent(event){
+    var docInfo = this.state.newDocInfo
+
+    docInfo.parent = event.target.value
+
+    this.setState({newDocInfo: docInfo})
+
+    this.props.newDocData(this.state.newDocInfo);
+  }
+
+
         setIds(parent,type){
           var childs = parent.childNodes
           var i=0
@@ -43,14 +94,35 @@ class CreateDocument extends Component {
     inputElement.focus()
     this.setIds(parent,inputType)
 
+    inputElement.addEventListener("input", () => {
+      var docInfo = this.state.newDocInfo
+ 
+        docInfo.tags[inputElement.id.split(" ")[1] - 1] = inputElement.value
+
+        this.setState({newDocInfo: docInfo})
+    })
+
+
     function deleteInput(event){
       parent.removeChild(event.currentTarget.parentNode)
       this.setIds(parent,inputType)
+
+      var docInfo = this.state.newDocInfo
+     
+      docInfo.tags.splice(inputElement.id.split(" ")[1] - 1,1)
+
+        this.setState({newDocInfo: docInfo})
+    
     }
+
+    this.props.newDocData(this.state.newDocInfo);
 
   }
   
   render() {
+       
+    console.log(this.state.newDocInfo)
+    
     return (
       <React.Fragment>
         <div className="blockContainer">
@@ -91,7 +163,7 @@ class CreateDocument extends Component {
           </div>
           <div className="colContainer">
             <div className="rowContainer">
-              <input type="text" className="lessWidth" />
+              <input type="text" onChange={this.handleTitle} className="lessWidth" />
             </div>
           </div>
         </div>
@@ -102,7 +174,7 @@ class CreateDocument extends Component {
           </div>
           <div className="colContainer">
             <div className="rowContainer">
-              <input type="text" className="totalWidth" />
+              <input type="text" onChange={this.handleSummary} className="totalWidth" />
             </div>
           </div>
         </div>
@@ -170,7 +242,7 @@ class CreateDocument extends Component {
           </div>
           <div className="colContainer">
             <div className="rowContainer">
-              <input type="text" className="totalWidth" />
+              <input type="text" onChange={this.handleParent} className="totalWidth" />
             </div>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import ArticleRequirements from "./ArticleRequirements";
 import TechRequirements from "./TechRequirements";
-import DynamicContent from "./DynamicContent"
+import DynamicContent from "./DynamicContent";
+import axios from "axios";
 import "./CreateDocument.scss";
 
 class CreateDocument extends Component {
@@ -10,9 +11,14 @@ class CreateDocument extends Component {
     this.state = {
       displayBlocks: "",
       selectedDocType: "",
+      newDoc: {
+        content: [],
+      },
     };
     this.handleBlocks = this.handleBlocks.bind(this);
     this.handleDocType = this.handleDocType.bind(this);
+    this.newDocData = this.newDocData.bind(this);
+    this.dynamicContent = this.dynamicContent.bind(this);
   }
   handleBlocks(docType) {
     this.setState({ displayBlocks: docType });
@@ -21,11 +27,57 @@ class CreateDocument extends Component {
     this.setState({ selectedDocType: event.target.name });
   }
 
+  newDocData(newDocInfo) {
+    if (this.state.selectedDocType == "article") {
+      var newArticle = {
+        title: newDocInfo.title,
+        type: newDocInfo.type,
+        summary: newDocInfo.summary,
+        technologies: newDocInfo.technologies,
+        tags: newDocInfo.tags,
+        content: this.state.newDoc.content,
+      };
+
+      this.setState({ newDoc: newArticle });
+    } else {
+      var newtech = {
+        title: newDocInfo.title,
+        type: newDocInfo.type,
+        summary: newDocInfo.summary,
+        tags: newDocInfo.tags,
+        parent: newDocInfo.parent,
+        content: this.state.newDoc.content,
+      };
+
+      this.setState({ newDoc: newtech });
+    }
+  }
+
+  dynamicContent(content) {
+    var newDoc = this.state.newDoc;
+    var url;
+
+    newDoc.content = content;
+
+    this.setState({ newDoc: newDoc });
+
+    if (this.state.selectedDocType == "article") {
+      url = "http://aweb4devsapi.herokuapp.com/save-article";
+    } else if (this.state.selectedDocType == "tech") {
+      url = "http://aweb4devsapi.herokuapp.com/save-tech";
+    } else {
+      return "error. no doctype selected";
+    }
+    axios.post(url, newDoc).then((res) => {
+      console.log(res), console.log(res.data);
+    }).catch((err)=>{console.log("Error during axios request: "+ err);});
+  }
+
   render() {
+    console.log(this.state.newDoc);
+
     return (
-  
-        <form className="form">
-          
+      <form className="form">
         <div className="hideToolbar">
           <div className="mainContainer1">
             <h1 className="title">CREATE A DOCUMENT</h1>
@@ -41,7 +93,7 @@ class CreateDocument extends Component {
                     onChange={this.handleDocType}
                     onClick={() => this.handleBlocks("article")}
                     type="radio"
-                    />
+                  />
                   <label className="label" htmlFor="isArticle">
                     Article
                   </label>
@@ -53,7 +105,7 @@ class CreateDocument extends Component {
                     onChange={this.handleDocType}
                     onClick={() => this.handleBlocks("tech")}
                     type="radio"
-                    />
+                  />
                   <label className="label" htmlFor="isTech">
                     Technology
                   </label>
@@ -61,18 +113,16 @@ class CreateDocument extends Component {
               </div>
             </div>
             {this.state.displayBlocks == "article" ? (
-              <ArticleRequirements />
-              ) : this.state.displayBlocks == "tech" ? (
-                <TechRequirements />
-                ) : null}
+              <ArticleRequirements newDocData={this.newDocData} />
+            ) : this.state.displayBlocks == "tech" ? (
+              <TechRequirements newDocData={this.newDocData} />
+            ) : null}
           </div>
         </div>
-        {this.state.displayBlocks!=""?(
-          <DynamicContent/>
-        ):null}
-       
+        {this.state.displayBlocks != "" ? (
+          <DynamicContent dynamicContent={this.dynamicContent} />
+        ) : null}
       </form>
-   
     );
   }
 }

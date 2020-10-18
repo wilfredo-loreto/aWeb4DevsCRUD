@@ -12,8 +12,12 @@ class DynamicContent extends Component {
     super(props);
     this.state={
       blocks:[],
-      toolBarOptions: [DynamicContentSubtitle,DynamicContentText,DynamicContentImage,DynamicContentList,DynamicContentReferences]
+      toolBarOptions: [DynamicContentSubtitle,DynamicContentText,DynamicContentImage,DynamicContentList,DynamicContentReferences],
+      dynamicContent: []
     }
+
+    this.addDynamicContent = this.addDynamicContent.bind(this);
+    this.createDoc = this.createDoc.bind(this);
   }
     addBlock(position,event){
       var pushedBlock = [...this.state.blocks]
@@ -25,18 +29,39 @@ class DynamicContent extends Component {
       var removedBlock = [...this.state.blocks]
       removedBlock.splice(position,1)
       this.setState({blocks:removedBlock})
+      var dynamicContent = this.state.dynamicContent
+
+      dynamicContent.splice(position, 1)
+
+      this.setState({dynamicContent:  dynamicContent})
+
+    }
+
+    addDynamicContent(content, order){
+      var dynamicContent = this.state.dynamicContent
+      dynamicContent[order] = content
+
+      this.setState({dynamicContent:  dynamicContent})
+    }
+
+    createDoc(){
+
+      this.props.dynamicContent(this.state.dynamicContent)
+
     }
   
   render() {
+    console.log(this.state.dynamicContent)
     return (
       <React.Fragment>
         <div className="mainContainer2">
           <h1 className="title" >CONTENT</h1>
-          {this.state.blocks.map((block,id)=>(React.createElement(block,{key:id,order:id,remove:this.removeBlock.bind(this)})))}
+          {this.state.blocks.map((block,id)=>(React.createElement(block,{key:id,order:id,remove:this.removeBlock.bind(this),addDynamicContent:this.addDynamicContent.bind(this)})))}
        
           <input
             value="CREATE"
             type="button"
+            onClick={this.createDoc}
             className="createDocumentButton"
           />
         </div>

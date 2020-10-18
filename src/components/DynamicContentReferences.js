@@ -4,6 +4,12 @@ import "./CreateDocument.scss";
 class DynamicContentReferences extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      refs: []
+
+    }
+
     this.handleInputs = this.handleInputs.bind(this);
   }
   setIds(parent, type) {
@@ -74,10 +80,39 @@ class DynamicContentReferences extends Component {
     inputElement2.focus();
     this.setIds(parent, inputType);
 
+
+
+    inputElement.addEventListener("input", () => {
+
+      if(inputElement2.value != null){
+
+        var docInfo = this.state.refs
+        
+        docInfo[inputElement.id.split(" ")[1] - 1] = {
+          link: inputElement.value,
+          author: inputElement2.value
+
+        }
+
+        this.setState({refs: docInfo})
+
+      }
+
+    })
+
     function deleteInput(event) {
       parent.removeChild(event.currentTarget.parentNode);
       this.setIds(parent, inputType);
+
+      var docInfo = this.state.refs
+ 
+      docInfo.splice(inputElement.id.split(" ")[1] - 1,1)
+
+      this.setState({refs: docInfo})
     }
+
+    this.props.addDynamicContent(this.state.refs, this.props.order)
+
   }
   render() {
     return (

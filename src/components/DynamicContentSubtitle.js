@@ -2,6 +2,26 @@ import React, { Component } from "react";
 import "./CreateDocument.scss";
 
 class DynamicContentSubtitle extends Component {
+  constructor(props){
+    super(props);
+
+    this.handleSubtitle= this.handleSubtitle.bind(this);
+
+  }
+
+
+  handleSubtitle(event){
+    var subtitle = {
+      type: "subtitle",
+      content: event.target.value
+    }
+
+    this.props.addDynamicContent(subtitle, this.props.order)
+
+
+  }
+
+
   render() {
     return (
       <div className="blockContainer dynamicContentSubtitle">
@@ -11,7 +31,7 @@ class DynamicContentSubtitle extends Component {
         </div>
         <div className="colContainer">
           <div className="rowContainer">
-            <input type="text" className="totalWidth" />
+            <input type="text" onChange={this.handleSubtitle} className="totalWidth" />
           </div>
         </div>
       </div>

@@ -2,9 +2,57 @@ import React, { Component } from "react";
 import "./CreateDocument.scss";
 
 class DynamicContentImage extends Component {
-  componentDidMount(){
-    console.log(this.props.order);
+  constructor(props){
+    super(props);
+    this.state={
+        image: {
+          type: "image",
+          content: {
+            img: "",
+            alt: ""
+          }
+        }
+    }
+
+    this.handleImg = this.handleImg.bind(this);
+    this.handleAltText = this.handleAltText.bind(this);
+ 
   }
+  
+
+  handleImg(event){
+
+    let reader = new FileReader()
+    
+
+    reader.readAsDataURL(event.target.files[0])
+    
+
+    reader.onload=(e)=>{
+
+      console.log(e.target.result)
+    }
+
+    var image = this.state.image
+    image.content.img = event.target.files[0].name
+
+    this.setState({image: image})
+
+    this.props.addDynamicContent(image, this.props.order)
+
+
+  }
+
+  handleAltText(event){
+    var image = this.state.image
+    image.content.alt = event.target.value
+
+    this.setState({image: image})
+
+    this.props.addDynamicContent(image, this.props.order)
+  }
+
+
   render() {
     return (
       <div className="blockContainer dynamicContentImage">
@@ -17,9 +65,12 @@ class DynamicContentImage extends Component {
                 <input
                   type="file"
                   className="submitButton"
-                  accept="image/png, image/jpg"
+                  onChange={this.handleImg}
+                  accept="image/*"
                 />
                 <input
+                  id="altText"
+                  onChange={this.handleAltText}
                   type="text"
                   placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
                   className="lessWidth"

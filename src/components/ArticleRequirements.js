@@ -2,17 +2,58 @@ import React, { Component } from "react";
 import "./CreateDocument.scss";
 
 class ArticleRequirements extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedTechType: "",
-    };
-    this.handleTechType = this.handleTechType.bind(this);
-    this.handleInputs = this.handleInputs.bind(this);
-  }
-  handleTechType(event) {
-    this.setState({ selectedTechType: event.target.name });
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+          selectedTechType: "",
+          newDocInfo: {
+            title: "",
+            type: "",
+            summary: "",
+            technologies: [],
+            tags: []
+            
+          },
+        
+        };
+        this.handleTechType = this.handleTechType.bind(this);
+        this.handleTitle = this.handleTitle.bind(this)
+        this.handleSummary = this.handleSummary.bind(this)
+       
+      }
+      handleTechType(event){
+        
+        var docInfo = this.state.newDocInfo
+
+        docInfo.type = event.target.name
+
+        this.setState({selectedTechType:event.target.name, newDocInfo: docInfo })
+
+        this.props.newDocData(this.state.newDocInfo);
+
+      }
+
+      handleTitle(event){
+        var docInfo = this.state.newDocInfo
+
+        docInfo.title = event.target.value
+
+        this.setState({newDocInfo: docInfo})
+
+        this.props.newDocData(this.state.newDocInfo);
+      }
+      
+
+      handleSummary(event){
+        var docInfo = this.state.newDocInfo
+
+        docInfo.summary = event.target.value
+
+        this.setState({newDocInfo: docInfo})
+
+        this.props.newDocData(this.state.newDocInfo);
+      }
+   
   setIds(parent,type) {
     var childs = parent.childNodes;
     var i = 0;
@@ -40,16 +81,58 @@ class ArticleRequirements extends Component {
     container.appendChild(closeImg)
     parent.appendChild(container)
     this.setIds(parent,inputType)
-    inputElement.focus() 
+
+    if(inputType == "tag"){
+
+      inputElement.addEventListener("input", () => {
+        var docInfo = this.state.newDocInfo
+   
+          docInfo.tags[inputElement.id.split(" ")[1] - 1] = inputElement.value
+  
+          this.setState({newDocInfo: docInfo})
+      })
+
+    }else{
+      
+      inputElement.addEventListener("input", () => {
+        var docInfo = this.state.newDocInfo
+
+          docInfo.technologies[inputElement.id.split(" ")[1] - 1] = inputElement.value
+  
+          this.setState({newDocInfo: docInfo})
+      })
+    }
+
     function deleteInput(event){
       parent.removeChild(event.currentTarget.parentNode)
       this.setIds(parent,inputType)
+
+      if(inputType == "tag"){
+
+          var docInfo = this.state.newDocInfo
+     
+          docInfo.tags.splice(inputElement.id.split(" ")[1] - 1,1)
+    
+            this.setState({newDocInfo: docInfo})
+        
+      }else{
+        
+          var docInfo = this.state.newDocInfo
+  
+            docInfo.technologies.splice(inputElement.id.split(" ")[1] - 1,1)
+    
+            this.setState({newDocInfo: docInfo})
+    
+      }
+  
     }
+
+    this.props.newDocData(this.state.newDocInfo);
 
   }
   
-
   render() {
+    console.log(this.state.newDocInfo)
     return (
       <React.Fragment>
         <div className="blockContainer">
@@ -113,7 +196,7 @@ class ArticleRequirements extends Component {
           </div>
           <div className="colContainer">
             <div className="rowContainer">
-              <input type="text" className="lessWidth" />
+              <input type="text"  onChange={this.handleTitle} className="lessWidth" />
             </div>
           </div>
         </div>
@@ -123,7 +206,27 @@ class ArticleRequirements extends Component {
           </div>
           <div className="colContainer">
             <div className="rowContainer">
-              <input type="text" className="totalWidth" />
+              <input type="text" onChange={this.handleSummary} className="totalWidth" />
+            </div>
+          </div>
+        </div>
+        <div className="blockContainer">
+          <div className="subtitleContainer">
+            <h2 className="subtitle">Image</h2>
+          
+          </div>
+          <div className="colContainer">
+            <div className="rowContainer">
+              <input
+                type="file"
+                className="submitButton"
+                accept="image/png, image/jpg"
+              />
+              <input
+                type="text"
+                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
+                className="lessWidth"
+              />
             </div>
           </div>
         </div>
