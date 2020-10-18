@@ -76,7 +76,7 @@ class CreateDocument extends Component {
 
     return (
   
-        <form className="form">
+      <form className="form">
           
         <div className="hideToolbar">
           <div className="mainContainer1">

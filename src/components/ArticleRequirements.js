@@ -209,6 +209,26 @@ class ArticleRequirements extends Component {
         </div>
         <div className="blockContainer">
           <div className="subtitleContainer">
+            <h2 className="subtitle">Image</h2>
+          
+          </div>
+          <div className="colContainer">
+            <div className="rowContainer">
+              <input
+                type="file"
+                className="submitButton"
+                accept="image/png, image/jpg"
+              />
+              <input
+                type="text"
+                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
+                className="lessWidth"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="blockContainer">
+          <div className="subtitleContainer">
             <h2 className="subtitle">Technologies</h2>
           </div>
           <div className="colContainer" id="technologyContainer">
