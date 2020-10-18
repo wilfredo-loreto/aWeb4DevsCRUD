@@ -34,7 +34,7 @@ class DynamicContentList extends Component {
   handleInputs(inputType, order, event) {
     var inputElement = document.createElement("input");
     inputElement.setAttribute("type", "text");
-    inputElement.setAttribute("class", "lessWidth");
+    inputElement.setAttribute("class", "totalWidth");
 
     var container = document.createElement("div");
     container.setAttribute("class", "rowContainer lessMargin");
@@ -51,9 +51,13 @@ class DynamicContentList extends Component {
       container.appendChild(label);
     }
 
-    container.appendChild(inputElement);
-    container.appendChild(closeImg);
+    inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
+      this.handleInputs(inputType,order,e)
+    }})
+    container.appendChild(inputElement)
+    container.appendChild(closeImg)
     parent.appendChild(container);
+    inputElement.focus();
     this.setIds(parent, inputType);
 
     inputElement.addEventListener("input", () => {
