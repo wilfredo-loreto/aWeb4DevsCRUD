@@ -61,9 +61,16 @@ class CreateDocument extends Component {
 
   dynamicContent(content) {
     var newDoc = this.state.newDoc;
-    var url;
+    var url,i;
     newDoc.content = content;
-  
+    
+    var inputsImages = document.querySelectorAll('input[type="file"]')
+    console.log(inputsImages)
+
+    for(i<=0;i<inputsImages.length;i++){
+      newDoc.images[i]=inputsImages[i].files[0]
+    }
+    
     this.setState({ newDoc: newDoc });
 
     if (this.state.selectedDocType == "article") {
