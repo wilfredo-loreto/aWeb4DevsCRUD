@@ -6,7 +6,10 @@ class DynamicContentReferences extends Component {
     super(props);
 
     this.state = {
-      refs: []
+      refs: {
+        type: "references",
+        content: []
+      }
 
     }
 
@@ -81,7 +84,7 @@ class DynamicContentReferences extends Component {
 
         var docInfo = this.state.refs
         
-        docInfo[inputElement.id.split(" ")[1] - 1] = {
+        docInfo.content[inputElement.id.split(" ")[1] - 1] = {
           link: inputElement.value,
           author: inputElement2.value
 
@@ -99,7 +102,7 @@ class DynamicContentReferences extends Component {
 
       var docInfo = this.state.refs
  
-      docInfo.splice(inputElement.id.split(" ")[1] - 1,1)
+      docInfo.content.splice(inputElement.id.split(" ")[1] - 1,1)
 
       this.setState({refs: docInfo})
     }
