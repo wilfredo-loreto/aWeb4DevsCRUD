@@ -56,9 +56,8 @@ class CreateDocument extends Component {
   dynamicContent(content) {
     var newDoc = this.state.newDoc;
     var url;
-
     newDoc.content = content;
-
+  
     this.setState({ newDoc: newDoc });
 
     if (this.state.selectedDocType == "article") {
