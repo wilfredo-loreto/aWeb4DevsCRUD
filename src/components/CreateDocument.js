@@ -63,43 +63,41 @@ class CreateDocument extends Component {
     var newDoc = this.state.newDoc;
     var url,i;
     newDoc.content = content;
+    console.log(newDoc.content + "this is newDoc.content")
     
     var inputsImages = document.querySelectorAll('input[type="file"]')
-    console.log(inputsImages)
+    console.log(inputsImages + "this is inputs values")
 
-    for(i<=0;i<inputsImages.length;i++){
+    for(i=0;i<inputsImages.length;i++){
       newDoc.images[i]=inputsImages[i].files[0]
     }
     
     this.setState({ newDoc: newDoc });
 
     var formData = new FormData()
-
+    
+    formData.append("title",newDoc.title)
+    formData.append("type",newDoc.type)
+    formData.append("summary", newDoc.summary)
+    formData.append("img", newDoc.img)
+    for(i=0;i<newDoc.tags.length;i++){
+      formData.append("tags", newDoc.tags[i])
+    }
+    for(i=0;i<newDoc.images.length;i++){
+      formData.append("images",newDoc.images[i],newDoc.images[i].name)
+    }
+    formData.append("content", newDoc.content)
 
     if (this.state.selectedDocType == "article") {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
 
-      formData.append("title",newDoc.title)
-      formData.append("type",newDoc.type)
-      formData.append("summary", newDoc.summary)
-      formData.append("img", newDoc.img)
       formData.append("technologies",newDoc.technologies)
-      formData.append("tags", newDoc.tags)
-      formData.append("content", newDoc.content)
-      formData.append("images",newDoc.images)
 
     } else {
       url = "http://aweb4devsapi.herokuapp.com/save-tech";
 
-      formData.append("title",newDoc.title)
-      formData.append("type",newDoc.type)
-      formData.append("summary", newDoc.summary)
-      formData.append("img", newDoc.img)
       formData.append("logo", newDoc.logo)
-      formData.append("tags", newDoc.tags)
-      formData.append("content", newDoc.content)
       formData.append("parent", newDoc.parent)
-      formData.append("images",newDoc.images)
     }
     axios.post(url, formData).then((res) => {
       console.log(res) 
@@ -142,7 +140,7 @@ class CreateDocument extends Component {
                   />
                   <label className="label" htmlFor="isTech">
                     Technology
-                  </label>
+                  </label> 
                 </div>
               </div>
             </div>
