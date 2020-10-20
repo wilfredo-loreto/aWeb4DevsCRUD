@@ -13,8 +13,9 @@ class CreateDocument extends Component {
       selectedDocType: "",
       newDoc: {
         content: [],
-        images: []
+      
       },
+      aux: false
     };
     this.handleBlocks = this.handleBlocks.bind(this);
     this.handleDocType = this.handleDocType.bind(this);
@@ -38,7 +39,7 @@ class CreateDocument extends Component {
         technologies: newDocInfo.technologies,
         tags: newDocInfo.tags,
         content: this.state.newDoc.content,
-        images: []
+    
       };
 
       this.setState({ newDoc: newArticle });
@@ -52,59 +53,57 @@ class CreateDocument extends Component {
         tags: newDocInfo.tags,
         parent: newDocInfo.parent,
         content: this.state.newDoc.content,
-        images: []
+   
       };
 
       this.setState({ newDoc: newtech });
     }
   }
 
-  dynamicContent(content) {
+  async dynamicContent(content) {
     var newDoc = this.state.newDoc;
     var url,i;
+    var images = []
     newDoc.content = content;
     
     var inputsImages = document.querySelectorAll('input[type="file"]')
     console.log(inputsImages)
 
-    for(i<=0;i<inputsImages.length;i++){
-      newDoc.images[i]=inputsImages[i].files[0]
+  
+
+    for(i = 0;i<inputsImages.length;i++){
+      images[i]=inputsImages[i].files[0]
     }
-    
-    this.setState({ newDoc: newDoc });
 
     var formData = new FormData()
+    console.log(images)
+    formData.append("title",newDoc.title)
+    for(i = 0; i < images.length; i++){
+        
+      formData.append("images",images[i],images[i].name)
+    }
 
+
+    
+    this.setState({ newDoc: newDoc });
 
     if (this.state.selectedDocType == "article") {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
 
-      formData.append("title",newDoc.title)
-      formData.append("type",newDoc.type)
-      formData.append("summary", newDoc.summary)
-      formData.append("img", newDoc.img)
-      formData.append("technologies",newDoc.technologies)
-      formData.append("tags", newDoc.tags)
-      formData.append("content", newDoc.content)
-      formData.append("images",newDoc.images)
-
     } else {
       url = "http://aweb4devsapi.herokuapp.com/save-tech";
-
-      formData.append("title",newDoc.title)
-      formData.append("type",newDoc.type)
-      formData.append("summary", newDoc.summary)
-      formData.append("img", newDoc.img)
-      formData.append("logo", newDoc.logo)
-      formData.append("tags", newDoc.tags)
-      formData.append("content", newDoc.content)
-      formData.append("parent", newDoc.parent)
-      formData.append("images",newDoc.images)
+    
     }
-    axios.post(url, formData).then((res) => {
-      console.log(res) 
-      console.log(res.data);
-    }).catch((err)=>{console.log("Error during axios request: "+ err)});
+
+    const saveDoc = axios.post(url, newDoc)
+    const res = (await saveDoc).data
+
+    console.log(res)
+  
+    const saveImages = axios.post("http://aweb4devsapi.herokuapp.com/hosting/save-images", formData)
+    const res2 = (await saveImages)
+
+    console.log(res2)
   }
 
   render() {
