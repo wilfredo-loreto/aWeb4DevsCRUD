@@ -73,12 +73,35 @@ class CreateDocument extends Component {
     
     this.setState({ newDoc: newDoc });
 
+    var formData = new FormData()
+
+
     if (this.state.selectedDocType == "article") {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
+
+      formData.append("title",newDoc.title)
+      formData.append("type",newDoc.type)
+      formData.append("summary", newDoc.summary)
+      formData.append("img", newDoc.img)
+      formData.append("technologies",newDoc.technologies)
+      formData.append("tags", newDoc.tags)
+      formData.append("content", newDoc.content)
+      formData.append("images",newDoc.images)
+
     } else {
       url = "http://aweb4devsapi.herokuapp.com/save-tech";
+
+      formData.append("title",newDoc.title)
+      formData.append("type",newDoc.type)
+      formData.append("summary", newDoc.summary)
+      formData.append("img", newDoc.img)
+      formData.append("logo", newDoc.logo)
+      formData.append("tags", newDoc.tags)
+      formData.append("content", newDoc.content)
+      formData.append("parent", newDoc.parent)
+      formData.append("images",newDoc.images)
     }
-    axios.post(url, newDoc).then((res) => {
+    axios.post(url, formData).then((res) => {
       console.log(res) 
       console.log(res.data);
     }).catch((err)=>{console.log("Error during axios request: "+ err)});
