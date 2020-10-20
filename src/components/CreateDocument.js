@@ -65,9 +65,10 @@ class CreateDocument extends Component {
     var url,i;
     var images = []
     newDoc.content = content;
+    console.log(newDoc.content + "this is newDoc.content")
     
     var inputsImages = document.querySelectorAll('input[type="file"]')
-    console.log(inputsImages)
+    console.log(inputsImages + "this is inputs values")
 
   
 
@@ -83,8 +84,6 @@ class CreateDocument extends Component {
       formData.append("images",images[i],images[i].name)
     }
 
-
-    
     this.setState({ newDoc: newDoc });
 
     if (this.state.selectedDocType == "article") {
@@ -141,7 +140,7 @@ class CreateDocument extends Component {
                   />
                   <label className="label" htmlFor="isTech">
                     Technology
-                  </label>
+                  </label> 
                 </div>
               </div>
             </div>

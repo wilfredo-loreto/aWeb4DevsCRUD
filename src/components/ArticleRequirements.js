@@ -92,6 +92,7 @@ class ArticleRequirements extends Component {
     container.appendChild(inputElement)
     container.appendChild(closeImg)
     parent.appendChild(container)
+    inputElement.focus()
     this.setIds(parent,inputType)
 
     if(inputType == "tag"){
