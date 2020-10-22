@@ -5,6 +5,7 @@ class ArticleRequirements extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          file:null,
           selectedTechType: "",
           newDocInfo: {
             title: "",
@@ -53,6 +54,9 @@ class ArticleRequirements extends Component {
         this.setState({newDocInfo: docInfo})
     
         this.props.newDocData(this.state.newDocInfo);
+        this.setState({
+          file: URL.createObjectURL(event.target.files[0])
+        })
       }
       
 
@@ -143,7 +147,6 @@ class ArticleRequirements extends Component {
     this.props.newDocData(this.state.newDocInfo);
 
   }
-  
   render() {
     console.log(this.state.newDocInfo)
     return (
@@ -242,6 +245,7 @@ class ArticleRequirements extends Component {
                 className="lessWidth"
               />
             </div>
+            <img src={this.state.file}/>
           </div>
         </div>
         <div className="blockContainer">

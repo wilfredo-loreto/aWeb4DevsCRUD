@@ -5,8 +5,9 @@ class CreateDocument extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      previewCard:null,
+      previewLogo:null,
       selectedTechType: "",
-      
       newDocInfo: {
         title: "",
         type: "",
@@ -42,7 +43,7 @@ class CreateDocument extends Component {
 
     docInfo.img = event.target.files[0].name
 
-    this.setState({newDocInfo: docInfo})
+    this.setState({newDocInfo: docInfo,previewCard:URL.createObjectURL(event.target.files[0])})
 
     this.props.newDocData(this.state.newDocInfo);
   }
@@ -53,8 +54,8 @@ class CreateDocument extends Component {
 
     docInfo.logo = event.target.files[0].name
 
-    this.setState({newDocInfo: docInfo})
-
+    
+    this.setState({newDocInfo: docInfo,previewLogo:URL.createObjectURL(event.target.files[0])})
     this.props.newDocData(this.state.newDocInfo);
   }
 
@@ -97,8 +98,9 @@ class CreateDocument extends Component {
             console.log("im in for");
           }
         }
-  handleInputs(inputType,event){
-    var inputElement = document.createElement("input")
+        handleInputs(inputType,event){
+          var previewImg = document.createElement("img")
+          var inputElement = document.createElement("input")
     inputElement.setAttribute("type","text")
     inputElement.setAttribute("class","lessWidth")
 
@@ -118,6 +120,9 @@ class CreateDocument extends Component {
     container.appendChild(inputElement)
     container.appendChild(closeImg)
     parent.appendChild(container)
+
+    
+    
     inputElement.focus()
     this.setIds(parent,inputType)
 
@@ -224,6 +229,7 @@ class CreateDocument extends Component {
                 className="lessWidth"
               />
             </div>
+            <img src={this.state.previewCard}/>
           </div>
         </div>
         <div className="blockContainer">
@@ -246,6 +252,7 @@ class CreateDocument extends Component {
                 className="lessWidth"
               />
             </div>
+            <img src={this.state.previewLogo}/>
           </div>
         </div>
         <div className="blockContainer" >

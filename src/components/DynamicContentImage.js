@@ -5,6 +5,7 @@ class DynamicContentImage extends Component {
   constructor(props){
     super(props);
     this.state={
+      showImage:null,
         image: {
           type: "image",
           content: {
@@ -36,7 +37,7 @@ class DynamicContentImage extends Component {
     var image = this.state.image
     image.content.img = event.target.files[0].name
 
-    this.setState({image: image})
+    this.setState({image: image,showImage:URL.createObjectURL(event.target.files[0])})
 
     this.props.addDynamicContent(image, this.props.order)
 
@@ -76,6 +77,7 @@ class DynamicContentImage extends Component {
                   className="lessWidth"
                 />
               </div>
+              <img src={this.state.showImage}/>
             </div>
           </div>
     );
