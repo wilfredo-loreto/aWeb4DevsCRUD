@@ -13,7 +13,7 @@ class CreateDocument extends Component {
       selectedDocType: "",
       newDoc: {
         content: [],
-        images: []
+        images: [],
       },
     };
     this.handleBlocks = this.handleBlocks.bind(this);
@@ -38,7 +38,7 @@ class CreateDocument extends Component {
         technologies: newDocInfo.technologies,
         tags: newDocInfo.tags,
         content: this.state.newDoc.content,
-        images: []
+        images: [],
       };
 
       this.setState({ newDoc: newArticle });
@@ -52,7 +52,7 @@ class CreateDocument extends Component {
         tags: newDocInfo.tags,
         parent: newDocInfo.parent,
         content: this.state.newDoc.content,
-        images: []
+        images: [],
       };
 
       this.setState({ newDoc: newtech });
@@ -61,50 +61,66 @@ class CreateDocument extends Component {
 
   dynamicContent(content) {
     var newDoc = this.state.newDoc;
-    var url,i;
+    var url, i;
     newDoc.content = content;
-    console.log(newDoc.content + "this is newDoc.content")
-    
-    var inputsImages = document.querySelectorAll('input[type="file"]')
-    console.log(inputsImages + "this is inputs values")
+    console.log(newDoc.content + "this is newDoc.content");
 
-    for(i=0;i<inputsImages.length;i++){
-      newDoc.images[i]=inputsImages[i].files[0]
+    var inputsImages = document.querySelectorAll('input[type="file"]');
+    console.log(inputsImages + "this is inputs values");
+
+    for (i = 0; i < inputsImages.length; i++) {
+      newDoc.images[i] = inputsImages[i].files[0];
     }
-    
+
     this.setState({ newDoc: newDoc });
 
-    var formData = new FormData()
-    
-    formData.append("title",newDoc.title)
-    formData.append("type",newDoc.type)
-    formData.append("summary", newDoc.summary)
-    formData.append("img", newDoc.img)
-    for(i=0;i<newDoc.tags.length;i++){
-      formData.append("tags", newDoc.tags[i])
+    var formData = new FormData();
+
+    formData.append("title", newDoc.title);
+    formData.append("type", newDoc.type);
+    formData.append("summary", newDoc.summary);
+    formData.append("img", newDoc.img);
+    for (i = 0; i < newDoc.tags.length; i++) {
+      formData.append("tags", newDoc.tags[i]);
     }
-    for(i=0;i<newDoc.images.length;i++){
-      formData.append("images",newDoc.images[i],newDoc.images[i].name)
+    for (i = 0; i < newDoc.images.length; i++) {
+      formData.append("images", newDoc.images[i], newDoc.images[i].name);
     }
-    formData.append("content", newDoc.content)
+    formData.append("content", newDoc.content);
 
     if (this.state.selectedDocType == "article") {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
 
-      formData.append("technologies",newDoc.technologies)
-
+      formData.append("technologies", newDoc.technologies);
     } else {
       url = "http://aweb4devsapi.herokuapp.com/save-tech";
 
-      formData.append("logo", newDoc.logo)
-      formData.append("parent", newDoc.parent)
+      formData.append("logo", newDoc.logo);
+      formData.append("parent", newDoc.parent);
     }
-    axios.post(url, formData).then((res) => {
-      console.log(res) 
-      console.log(res.data);
-    }).catch((err)=>{console.log("Error during axios request: "+ err)});
+    axios
+      .post(url, formData)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("Error during axios request: " + err);
+      });
   }
-
+  componentDidMount() {
+    if (this.props.isEdit) {
+      var path = this.props.location.pathname;
+      var splitted = path.split("/");
+      console.log(splitted);
+      var documentType = splitted[2]
+      var documentName = splitted[3] 
+      var url = `http://aweb4devsapi.herokuapp.com/${documentType}/${documentName}`
+      axios.get(url).then((res)=>{
+        console.log(res.data);
+      }).catch((err)=>{console.log(err);})
+    }
+  }
   render() {
     console.log(this.state.newDoc);
 
@@ -140,7 +156,7 @@ class CreateDocument extends Component {
                   />
                   <label className="label" htmlFor="isTech">
                     Technology
-                  </label> 
+                  </label>
                 </div>
               </div>
             </div>

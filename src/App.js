@@ -8,8 +8,10 @@ import CreateDocument from "./components/CreateDocument"
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,withRouter
 } from "react-router-dom";
+
+const EditComponent = withRouter(props=> <CreateDocument {...props}/>)
 
 function App() {
 
@@ -71,9 +73,9 @@ function App() {
 
           </Route>
 
-          <Route path="/edit/:title">
+          <Route path="/edit/:type/:title">
 
-          <h1>5</h1>
+          <EditComponent isEdit={true} />
 
           </Route>
 

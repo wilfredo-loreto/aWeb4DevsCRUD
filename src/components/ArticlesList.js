@@ -101,7 +101,7 @@ export default class ArticlesList extends Component {
                   <td className="tableTitle">{article.title}</td>
                   <td className="tableDate">{article.date.split("T")[0]}</td>
                   <td className="tableActions">
-                    <Link className="edit" to={"/edit/" + article.title}>
+                    <Link className="edit" to={"/edit/article/" + article.title}>
                       <img src="/icon/edit.png" />
                       <h3>EDIT</h3>
                     </Link>

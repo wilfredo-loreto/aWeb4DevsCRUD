@@ -90,7 +90,7 @@ export default class BackendList extends Component {
                 <tr key={count} className={count % 2 === 0 ? "tableRow" : ""}>
                   <td className="tableTitle">{article.title}</td>
                   <td className="tableActions">
-                    <Link className="edit" to={"/edit/" + article.title}>
+                    <Link className="edit" to={"/edit/tech/" + article.title}>
                       <img src="/icon/edit.png" alt="edit icon" />
                       <h3>EDIT</h3>
                     </Link>
