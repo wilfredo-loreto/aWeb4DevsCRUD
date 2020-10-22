@@ -67,7 +67,8 @@ class CreateDocument extends Component {
     newDoc.content = content;
     console.log(newDoc.content + "this is newDoc.content");
 
-  
+    var inputsImages = document.querySelectorAll('input[type="file"]');
+    console.log(inputsImages + "this is inputs values");
 
     for(i = 0;i<inputsImages.length;i++){
       images[i]=inputsImages[i].files[0]
@@ -85,21 +86,37 @@ class CreateDocument extends Component {
 
     if (this.state.selectedDocType == "article") {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
-
     } else {
       url = "http://aweb4devsapi.herokuapp.com/save-tech";
-    
+
     }
-
-    const saveDoc = axios.post(url, newDoc)
-    const res = (await saveDoc).data
-
-    console.log(res)
-  
-    const saveImages = axios.post("http://aweb4devsapi.herokuapp.com/hosting/save-images", formData)
-    const res2 = (await saveImages)
-
-    console.log(res2)
+    try{
+      const saveDoc = axios.post(url, newDoc)
+      const res = (await saveDoc).data
+      console.log(res)
+      try{
+        const saveImages = axios.post("http://aweb4devsapi.herokuapp.com/hosting/save-images", formData)
+        const res2 = (await saveImages)
+        console.log(res2)
+      }catch(err){
+        console.log(err);
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
+  componentDidMount() {
+    if (this.props.isEdit) {
+      var path = this.props.location.pathname;
+      var splitted = path.split("/");
+      console.log(splitted);
+      var documentType = splitted[2]
+      var documentName = splitted[3] 
+      var url = `http://aweb4devsapi.herokuapp.com/${documentType}/${documentName}`
+      axios.get(url).then((res)=>{
+        console.log(res.data);
+      }).catch((err)=>{console.log(err);})
+    }
   }
   render() {
     console.log(this.state.newDoc);
