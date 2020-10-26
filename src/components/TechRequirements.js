@@ -229,7 +229,7 @@ class CreateDocument extends Component {
                 className="lessWidth"
               />
             </div>
-            <img src={this.state.previewCard}/>
+            <img src={this.state.previewCard} />
           </div>
         </div>
         <div className="blockContainer">
@@ -257,7 +257,7 @@ class CreateDocument extends Component {
         </div>
         <div className="blockContainer" >
           <div className="subtitleContainer">
-            <h2 className="subtitle">Tags (Keywords for Search Bar)</h2>
+            <h2 className="subtitle">Tags (Keywords for Search Bar) (NOTE: FIRST TAG IS THE MAIN TAG TO BE DISPLAYED IN ACCORDION)</h2>
           
           </div>
           <div className="colContainer"id="tagContainer">
