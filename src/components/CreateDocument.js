@@ -13,9 +13,8 @@ class CreateDocument extends Component {
       selectedDocType: "",
       newDoc: {
         content: [],
-      
       },
-      aux: false
+      aux: false,
     };
     this.handleBlocks = this.handleBlocks.bind(this);
     this.handleDocType = this.handleDocType.bind(this);
@@ -39,7 +38,6 @@ class CreateDocument extends Component {
         technologies: newDocInfo.technologies,
         tags: newDocInfo.tags,
         content: this.state.newDoc.content,
-    
       };
 
       this.setState({ newDoc: newArticle });
@@ -53,7 +51,6 @@ class CreateDocument extends Component {
         tags: newDocInfo.tags,
         parent: newDocInfo.parent,
         content: this.state.newDoc.content,
-   
       };
 
       this.setState({ newDoc: newtech });
@@ -62,21 +59,20 @@ class CreateDocument extends Component {
 
   async dynamicContent(content) {
     var newDoc = this.state.newDoc;
-    var url,i;
-    var images = []
+    var url, i;
+    var images = [];
     newDoc.content = content;
 
     var inputsImages = document.querySelectorAll('input[type="file"]');
 
-    for(i = 0;i<inputsImages.length;i++){
-      images[i]=inputsImages[i].files[0]
+    for (i = 0; i < inputsImages.length; i++) {
+      images[i] = inputsImages[i].files[0];
     }
 
-    var formData = new FormData()
-    formData.append("title",newDoc.title)
-    for(i = 0; i < images.length; i++){
-        
-      formData.append("images",images[i],images[i].name)
+    var formData = new FormData();
+    formData.append("title", newDoc.title);
+    for (i = 0; i < images.length; i++) {
+      formData.append("images", images[i], images[i].name);
     }
 
     this.setState({ newDoc: newDoc });
@@ -85,32 +81,37 @@ class CreateDocument extends Component {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
     } else {
       url = "http://aweb4devsapi.herokuapp.com/save-tech";
-
     }
-    try{
-      const saveDoc = axios.post(url, newDoc)
-      const res = (await saveDoc).data
-     
-      try{
-        const saveImages = axios.post("http://aweb4devsapi.herokuapp.com/hosting/save-images", formData)
-        const res2 = (await saveImages)
-        
-      }catch(err){
-        throw (err);
+    try {
+      const saveDoc = axios.post(url, newDoc);
+      const res = (await saveDoc).data;
+
+      try {
+        const saveImages = axios.post(
+          "http://aweb4devsapi.herokuapp.com/hosting/save-images",
+          formData
+        );
+        const res2 = await saveImages;
+      } catch (err) {
+        throw err;
       }
-    }catch(err){
-      throw (err);
+    } catch (err) {
+      throw err;
     }
   }
   componentDidMount() {
     if (this.props.isEdit) {
       var path = this.props.location.pathname;
       var splitted = path.split("/");
-      var documentType = splitted[2]
-      var documentName = splitted[3] 
-      var url = `http://aweb4devsapi.herokuapp.com/${documentType}/${documentName}`
-      axios.get(url).then((res)=>{
-      }).catch((err)=>{throw err;})
+      var documentType = splitted[2];
+      var documentName = splitted[3];
+      var url = `http://aweb4devsapi.herokuapp.com/${documentType}/${documentName}`;
+      axios
+        .get(url)
+        .then((res) => {})
+        .catch((err) => {
+          throw err;
+        });
     }
   }
   render() {

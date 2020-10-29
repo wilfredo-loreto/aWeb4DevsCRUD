@@ -14,11 +14,14 @@ export default class FrontendList extends Component {
   }
 
   async componentDidMount() {
-    const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/frontend");
-    const posts = (await res).data;
+    try {
+      const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/frontend");
+      const posts = (await res).data;
 
-    this.setState({ frontend: posts.techs });
-
+      this.setState({ frontend: posts.techs });
+    } catch (error) {
+      alert("error during http request: " + err);
+    }
   }
 
   onChangePage(pageOfItems) {
@@ -26,32 +29,24 @@ export default class FrontendList extends Component {
     this.setState({ pageOfItems: pageOfItems });
   }
 
-  corfirmAlert(title, count){
-   
-    if(window.confirm("Are you sure?")){
-
-      this.deleteArticle(title, count)
-
+  corfirmAlert(title, count) {
+    if (window.confirm("Are you sure?")) {
+      this.deleteArticle(title, count);
     }
-
   }
 
-  async deleteArticle(title, count){
-
+  async deleteArticle(title, count) {
     const res = axios.delete(
       "http://aweb4devsapi.herokuapp.com/delete-tech/" + title
-    )
-    const posts = (await res).data
-    
-    if(posts.message === "deleted"){
-      
-      var newData = this.state.frontend
-      newData.splice(count,1)
-  
-      this.setState({pageOfItems: newData })
-      
-    }
+    );
+    const posts = (await res).data;
 
+    if (posts.message === "deleted") {
+      var newData = this.state.frontend;
+      newData.splice(count, 1);
+
+      this.setState({ pageOfItems: newData });
+    }
   }
 
   render() {
@@ -92,7 +87,10 @@ export default class FrontendList extends Component {
                       <h3>EDIT</h3>
                     </Link>
 
-                    <div onClick={() => this.corfirmAlert(article.title,count)} className="delete">
+                    <div
+                      onClick={() => this.corfirmAlert(article.title, count)}
+                      className="delete"
+                    >
                       <img src="/icon/delete.png" alt="delete icon" />
                       <h3>DELETE</h3>
                     </div>

@@ -2,84 +2,80 @@ import React, { Component } from "react";
 import "./CreateDocument.scss";
 
 class DynamicContentImage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      showImage:null,
-        image: {
-          type: "image",
-          content: {
-            img: "",
-            alt: ""
-          }
-        }
-    }
+    this.state = {
+      showImage: null,
+      image: {
+        type: "image",
+        content: {
+          img: "",
+          alt: "",
+        },
+      },
+    };
 
     this.handleImg = this.handleImg.bind(this);
     this.handleAltText = this.handleAltText.bind(this);
- 
-  }
-  
-
-  handleImg(event){
-
-    let reader = new FileReader()
-    
-
-    reader.readAsDataURL(event.target.files[0])
-    
-
-    reader.onload=(e)=>{
-
-      
-    }
-
-    var image = this.state.image
-    image.content.img = event.target.files[0].name
-
-    this.setState({image: image,showImage:URL.createObjectURL(event.target.files[0])})
-
-    this.props.addDynamicContent(image, this.props.order)
-
-
   }
 
-  handleAltText(event){
-    var image = this.state.image
-    image.content.alt = event.target.value
+  handleImg(event) {
+    let reader = new FileReader();
 
-    this.setState({image: image})
+    reader.readAsDataURL(event.target.files[0]);
 
-    this.props.addDynamicContent(image, this.props.order)
+    reader.onload = (e) => {};
+
+    var image = this.state.image;
+    image.content.img = event.target.files[0].name;
+
+    this.setState({
+      image: image,
+      showImage: URL.createObjectURL(event.target.files[0]),
+    });
+
+    this.props.addDynamicContent(image, this.props.order);
   }
 
+  handleAltText(event) {
+    var image = this.state.image;
+    image.content.alt = event.target.value;
+
+    this.setState({ image: image });
+
+    this.props.addDynamicContent(image, this.props.order);
+  }
 
   render() {
     return (
       <div className="blockContainer dynamicContentImage">
-            <div className="subtitleContainer">
-    <h2 className="subtitle">#{this.props.order} Image </h2>
-              <img alt="close button" src="/icon/close.svg"onClick={(e)=>this.props.remove(this.props.order,e)} />
-            </div>
-            <div className="colContainer">
-              <div className="rowContainer">
-                <input
-                  type="file"
-                  className="submitButton"
-                  onChange={this.handleImg}
-                  accept="image/*"
-                />
-                <input
-                  id="altText"
-                  onChange={this.handleAltText}
-                  type="text"
-                  placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
-                  className="lessWidth"
-                />
-              </div>
-              <img src={this.state.showImage}/>
-            </div>
+        <div className="subtitleContainer">
+          <h2 className="subtitle">#{this.props.order} Image </h2>
+          <img
+            alt="close button"
+            src="/icon/close.svg"
+            onClick={(e) => this.props.remove(this.props.order, e)}
+          />
+        </div>
+        <div className="colContainer">
+          <div className="rowContainer">
+            <input
+              type="file"
+              className="submitButton"
+              onChange={this.handleImg}
+              accept="image/*"
+            />
+            <input
+              id="altText"
+              onChange={this.handleAltText}
+              type="text"
+              placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
+              className="lessWidth"
+            />
           </div>
+          <img src={this.state.showImage} />
+        </div>
+      </div>
     );
   }
 }

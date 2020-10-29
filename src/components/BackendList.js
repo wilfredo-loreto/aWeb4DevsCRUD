@@ -14,10 +14,14 @@ export default class BackendList extends Component {
   }
 
   async componentDidMount() {
-    const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/backend");
-    const posts = (await res).data;
+    try {
+      const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/backend");
+      const posts = (await res).data;
 
-    this.setState({ backend: posts.techs });
+      this.setState({ backend: posts.techs });
+    } catch (error) {
+      alert("error during http request: " + err);
+    }
   }
 
   onChangePage(pageOfItems) {
@@ -25,31 +29,23 @@ export default class BackendList extends Component {
     this.setState({ pageOfItems: pageOfItems });
   }
 
-  corfirmAlert(title, count){
-   
-    if(window.confirm("Are you sure?")){
-
-      this.deleteArticle(title, count)
-
+  corfirmAlert(title, count) {
+    if (window.confirm("Are you sure?")) {
+      this.deleteArticle(title, count);
     }
-
   }
 
-  async deleteArticle(title, count){
-
+  async deleteArticle(title, count) {
     const res = axios.delete(
       "http://aweb4devsapi.herokuapp.com/delete-tech/" + title
-    )
-    const posts = (await res).data
-    
-    if(posts.message === "deleted"){
-      
-      var newData = this.state.backend
-      newData.splice(count,1)
-      this.setState({pageOfItems: newData })
-      
-    }
+    );
+    const posts = (await res).data;
 
+    if (posts.message === "deleted") {
+      var newData = this.state.backend;
+      newData.splice(count, 1);
+      this.setState({ pageOfItems: newData });
+    }
   }
 
   render() {
@@ -91,7 +87,11 @@ export default class BackendList extends Component {
                     </Link>
 
                     <div className="delete">
-                      <img onClick={() => this.corfirmAlert(article.title,count)} src="/icon/delete.png" alt="delete icon" />
+                      <img
+                        onClick={() => this.corfirmAlert(article.title, count)}
+                        src="/icon/delete.png"
+                        alt="delete icon"
+                      />
                       <h3>DELETE</h3>
                     </div>
                   </td>

@@ -8,10 +8,9 @@ class DynamicContentReferences extends Component {
     this.state = {
       refs: {
         type: "references",
-        content: []
-      }
-
-    }
+        content: [],
+      },
+    };
 
     this.handleInputs = this.handleInputs.bind(this);
   }
@@ -27,9 +26,12 @@ class DynamicContentReferences extends Component {
             "id",
             this.props.order + " " + type + " item " + i
           );
-        }else{
-          childs[i].childNodes[2].setAttribute("id",type + " " + i + " Author")
-          childs[i].childNodes[4].setAttribute("id",type + " " + i + " Link")
+        } else {
+          childs[i].childNodes[2].setAttribute(
+            "id",
+            type + " " + i + " Author"
+          );
+          childs[i].childNodes[4].setAttribute("id", type + " " + i + " Link");
         }
       } else {
         childs[i].firstElementChild.setAttribute("id", type + " " + i);
@@ -71,51 +73,47 @@ class DynamicContentReferences extends Component {
       container.appendChild(link);
     }
 
-    inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
-      this.handleInputs(inputType,order,e)
-    }})
-    inputElement2.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
-      this.handleInputs(inputType,order,e)
-    }})
-    container.appendChild(inputElement)
-    container.appendChild(closeImg)
+    inputElement.addEventListener("keypress", (e) => {
+      if (e.key == "Enter") {
+        this.handleInputs(inputType, order, e);
+      }
+    });
+    inputElement2.addEventListener("keypress", (e) => {
+      if (e.key == "Enter") {
+        this.handleInputs(inputType, order, e);
+      }
+    });
+    container.appendChild(inputElement);
+    container.appendChild(closeImg);
     parent.appendChild(container);
     inputElement2.focus();
     this.setIds(parent, inputType);
 
-
-
     inputElement.addEventListener("input", () => {
+      if (inputElement2.value != null) {
+        var docInfo = this.state.refs;
 
-      if(inputElement2.value != null){
-
-        var docInfo = this.state.refs
-        
         docInfo.content[inputElement.id.split(" ")[1] - 1] = {
           link: inputElement.value,
-          author: inputElement2.value
+          author: inputElement2.value,
+        };
 
-        }
-
-        this.setState({refs: docInfo})
-
+        this.setState({ refs: docInfo });
       }
-
-    })
+    });
 
     function deleteInput(event) {
       parent.removeChild(event.currentTarget.parentNode);
       this.setIds(parent, inputType);
 
-      var docInfo = this.state.refs
- 
-      docInfo.content.splice(inputElement.id.split(" ")[1] - 1,1)
+      var docInfo = this.state.refs;
 
-      this.setState({refs: docInfo})
+      docInfo.content.splice(inputElement.id.split(" ")[1] - 1, 1);
+
+      this.setState({ refs: docInfo });
     }
 
-    this.props.addDynamicContent(this.state.refs, this.props.order)
-
+    this.props.addDynamicContent(this.state.refs, this.props.order);
   }
   render() {
     return (

@@ -117,18 +117,18 @@ class Pagination extends React.Component {
     return (
       <ul className="pagination">
         <li className={pager.currentPage === 1 ? "disabled" : ""}>
-          <a  onClick={() => this.setPage(1)}>
+          <a onClick={() => this.setPage(1)}>
             <img src="/icon/double-arrow-left.png" alt="arrow" />
           </a>
         </li>
         <li className={pager.currentPage === 1 ? "disabled" : ""}>
-          <a  onClick={() => this.setPage(pager.currentPage - 1)}>
-            <img src="/icon/arrow-left.png" alt="arrow"/>
+          <a onClick={() => this.setPage(pager.currentPage - 1)}>
+            <img src="/icon/arrow-left.png" alt="arrow" />
           </a>
         </li>
         {pager.pages.map((page, index) => (
           <li key={index}>
-            <a 
+            <a
               className={pager.currentPage === page ? "active" : ""}
               onClick={() => this.setPage(page)}
             >
@@ -139,14 +139,14 @@ class Pagination extends React.Component {
         <li
           className={pager.currentPage === pager.totalPages ? "disabled" : ""}
         >
-          <a  onClick={() => this.setPage(pager.currentPage + 1)}>
+          <a onClick={() => this.setPage(pager.currentPage + 1)}>
             <img src="/icon/arrow-right.png" alt="arrow" />
           </a>
         </li>
         <li
           className={pager.currentPage === pager.totalPages ? "disabled" : ""}
         >
-          <a  onClick={() => this.setPage(pager.totalPages)}>
+          <a onClick={() => this.setPage(pager.totalPages)}>
             <img src="/icon/double-arrow-right.png" alt="arrow" />
           </a>
         </li>

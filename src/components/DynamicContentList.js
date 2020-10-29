@@ -8,10 +8,9 @@ class DynamicContentList extends Component {
     this.state = {
       list: {
         type: "list",
-        content: []
-      }
-    }
-
+        content: [],
+      },
+    };
 
     this.handleInputs = this.handleInputs.bind(this);
     this.setIds = this.setIds.bind(this);
@@ -51,37 +50,38 @@ class DynamicContentList extends Component {
       container.appendChild(label);
     }
 
-    inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
-      this.handleInputs(inputType,order,e)
-    }})
-    container.appendChild(inputElement)
-    container.appendChild(closeImg)
+    inputElement.addEventListener("keypress", (e) => {
+      if (e.key == "Enter") {
+        this.handleInputs(inputType, order, e);
+      }
+    });
+    container.appendChild(inputElement);
+    container.appendChild(closeImg);
     parent.appendChild(container);
     inputElement.focus();
     this.setIds(parent, inputType);
 
     inputElement.addEventListener("input", () => {
-      var docInfo = this.state.list
- 
-        docInfo.content[inputElement.id.split("item")[1] - 1] = inputElement.value
+      var docInfo = this.state.list;
 
-        this.setState({list: docInfo})
-        
-    })
+      docInfo.content[inputElement.id.split("item")[1] - 1] =
+        inputElement.value;
+
+      this.setState({ list: docInfo });
+    });
 
     function deleteInput(event) {
       parent.removeChild(event.currentTarget.parentNode);
       this.setIds(parent, inputType);
 
-      var docInfo = this.state.list
- 
-      docInfo.content.splice(inputElement.id.split("item")[1] - 1,1)
+      var docInfo = this.state.list;
 
-      this.setState({list: docInfo})
+      docInfo.content.splice(inputElement.id.split("item")[1] - 1, 1);
+
+      this.setState({ list: docInfo });
     }
 
-    this.props.addDynamicContent(this.state.list, this.props.order)
-
+    this.props.addDynamicContent(this.state.list, this.props.order);
   }
   render() {
     return (

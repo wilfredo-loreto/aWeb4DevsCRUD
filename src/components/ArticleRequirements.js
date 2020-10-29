@@ -2,149 +2,137 @@ import React, { Component } from "react";
 import "./CreateDocument.scss";
 
 class ArticleRequirements extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          file:null,
-          selectedTechType: "",
-          newDocInfo: {
-            title: "",
-            type: "",
-            img: "",
-            summary: "",
-            technologies: [],
-            tags: []
-            
-          },
-        
-        };
-        this.handleTechType = this.handleTechType.bind(this);
-        this.handleTitle = this.handleTitle.bind(this)
-        this.handleSummary = this.handleSummary.bind(this)
-        this.handleImg = this.handleImg.bind(this)
-       
-      }
-      handleTechType(event){
-        
-        var docInfo = this.state.newDocInfo
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: null,
+      selectedTechType: "",
+      newDocInfo: {
+        title: "",
+        type: "",
+        img: "",
+        summary: "",
+        technologies: [],
+        tags: [],
+      },
+    };
+    this.handleTechType = this.handleTechType.bind(this);
+    this.handleTitle = this.handleTitle.bind(this);
+    this.handleSummary = this.handleSummary.bind(this);
+    this.handleImg = this.handleImg.bind(this);
+  }
+  handleTechType(event) {
+    var docInfo = this.state.newDocInfo;
 
-        docInfo.type = event.target.name
+    docInfo.type = event.target.name;
 
-        this.setState({selectedTechType:event.target.name, newDocInfo: docInfo })
+    this.setState({ selectedTechType: event.target.name, newDocInfo: docInfo });
 
-        this.props.newDocData(this.state.newDocInfo);
+    this.props.newDocData(this.state.newDocInfo);
+  }
 
-      }
+  handleTitle(event) {
+    var docInfo = this.state.newDocInfo;
 
-      handleTitle(event){
-        var docInfo = this.state.newDocInfo
+    docInfo.title = event.target.value;
 
-        docInfo.title = event.target.value
+    this.setState({ newDocInfo: docInfo });
 
-        this.setState({newDocInfo: docInfo})
+    this.props.newDocData(this.state.newDocInfo);
+  }
 
-        this.props.newDocData(this.state.newDocInfo);
-      }
+  handleImg(event) {
+    var docInfo = this.state.newDocInfo;
 
-      handleImg(event){
-        var docInfo = this.state.newDocInfo
-    
-        docInfo.img = event.target.files[0].name
-    
-        this.setState({newDocInfo: docInfo})
-    
-        this.props.newDocData(this.state.newDocInfo);
-        this.setState({
-          file: URL.createObjectURL(event.target.files[0])
-        })
-      }
-      
+    docInfo.img = event.target.files[0].name;
 
-      handleSummary(event){
-        var docInfo = this.state.newDocInfo
+    this.setState({ newDocInfo: docInfo });
 
-        docInfo.summary = event.target.value
+    this.props.newDocData(this.state.newDocInfo);
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0]),
+    });
+  }
 
-        this.setState({newDocInfo: docInfo})
+  handleSummary(event) {
+    var docInfo = this.state.newDocInfo;
 
-        this.props.newDocData(this.state.newDocInfo);
-      }
-   
-  setIds(parent,type) {
+    docInfo.summary = event.target.value;
+
+    this.setState({ newDocInfo: docInfo });
+
+    this.props.newDocData(this.state.newDocInfo);
+  }
+
+  setIds(parent, type) {
     var childs = parent.childNodes;
     var i = 0;
     for (i = 1; i < childs.length; i++) {
-      childs[i].firstElementChild.setAttribute("id", type+ " " + i);
+      childs[i].firstElementChild.setAttribute("id", type + " " + i);
     }
   }
-  handleInputs(inputType,event){
-    var inputElement = document.createElement("input")
-    
-    var container = document.createElement("div")
-    var parent = document.getElementById(inputType +"Container")
-    var closeImg = document.createElement("img")
-    inputElement.setAttribute("type","text")
-    inputElement.setAttribute("class","lessWidth")
-    container.setAttribute("class","rowContainer lessMargin")
-    
-    closeImg.setAttribute("src","/icon/close.svg")
-    closeImg.addEventListener("click",deleteInput.bind(this))
-    inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
-      this.handleInputs(inputType,e)
-    }})
-    container.appendChild(inputElement)
-    container.appendChild(closeImg)
-    parent.appendChild(container)
-    inputElement.focus()
-    this.setIds(parent,inputType)
+  handleInputs(inputType, event) {
+    var inputElement = document.createElement("input");
 
-    if(inputType == "tag"){
+    var container = document.createElement("div");
+    var parent = document.getElementById(inputType + "Container");
+    var closeImg = document.createElement("img");
+    inputElement.setAttribute("type", "text");
+    inputElement.setAttribute("class", "lessWidth");
+    container.setAttribute("class", "rowContainer lessMargin");
 
+    closeImg.setAttribute("src", "/icon/close.svg");
+    closeImg.addEventListener("click", deleteInput.bind(this));
+    inputElement.addEventListener("keypress", (e) => {
+      if (e.key == "Enter") {
+        this.handleInputs(inputType, e);
+      }
+    });
+    container.appendChild(inputElement);
+    container.appendChild(closeImg);
+    parent.appendChild(container);
+    inputElement.focus();
+    this.setIds(parent, inputType);
+
+    if (inputType == "tag") {
       inputElement.addEventListener("input", () => {
-        var docInfo = this.state.newDocInfo
-   
-          docInfo.tags[inputElement.id.split(" ")[1] - 1] = inputElement.value
-  
-          this.setState({newDocInfo: docInfo})
-      })
+        var docInfo = this.state.newDocInfo;
 
-    }else{
-      
+        docInfo.tags[inputElement.id.split(" ")[1] - 1] = inputElement.value;
+
+        this.setState({ newDocInfo: docInfo });
+      });
+    } else {
       inputElement.addEventListener("input", () => {
-        var docInfo = this.state.newDocInfo
+        var docInfo = this.state.newDocInfo;
 
-          docInfo.technologies[inputElement.id.split(" ")[1] - 1] = inputElement.value
-  
-          this.setState({newDocInfo: docInfo})
-      })
+        docInfo.technologies[inputElement.id.split(" ")[1] - 1] =
+          inputElement.value;
+
+        this.setState({ newDocInfo: docInfo });
+      });
     }
 
-    function deleteInput(event){
-      parent.removeChild(event.currentTarget.parentNode)
-      this.setIds(parent,inputType)
+    function deleteInput(event) {
+      parent.removeChild(event.currentTarget.parentNode);
+      this.setIds(parent, inputType);
 
-      if(inputType == "tag"){
+      if (inputType == "tag") {
+        var docInfo = this.state.newDocInfo;
 
-          var docInfo = this.state.newDocInfo
-     
-          docInfo.tags.splice(inputElement.id.split(" ")[1] - 1,1)
-    
-            this.setState({newDocInfo: docInfo})
-        
-      }else{
-        
-          var docInfo = this.state.newDocInfo
-  
-            docInfo.technologies.splice(inputElement.id.split(" ")[1] - 1,1)
-    
-            this.setState({newDocInfo: docInfo})
-    
+        docInfo.tags.splice(inputElement.id.split(" ")[1] - 1, 1);
+
+        this.setState({ newDocInfo: docInfo });
+      } else {
+        var docInfo = this.state.newDocInfo;
+
+        docInfo.technologies.splice(inputElement.id.split(" ")[1] - 1, 1);
+
+        this.setState({ newDocInfo: docInfo });
       }
-  
     }
 
     this.props.newDocData(this.state.newDocInfo);
-
   }
   render() {
     return (
@@ -210,7 +198,11 @@ class ArticleRequirements extends Component {
           </div>
           <div className="colContainer">
             <div className="rowContainer">
-              <input type="text"  onChange={this.handleTitle} className="lessWidth" />
+              <input
+                type="text"
+                onChange={this.handleTitle}
+                className="lessWidth"
+              />
             </div>
           </div>
         </div>
@@ -220,14 +212,17 @@ class ArticleRequirements extends Component {
           </div>
           <div className="colContainer">
             <div className="rowContainer">
-              <input type="text" onChange={this.handleSummary} className="totalWidth" />
+              <input
+                type="text"
+                onChange={this.handleSummary}
+                className="totalWidth"
+              />
             </div>
           </div>
         </div>
         <div className="blockContainer">
           <div className="subtitleContainer">
             <h2 className="subtitle">Image</h2>
-          
           </div>
           <div className="colContainer">
             <div className="rowContainer">
@@ -243,7 +238,7 @@ class ArticleRequirements extends Component {
                 className="lessWidth"
               />
             </div>
-            <img src={this.state.file}/>
+            <img src={this.state.file} />
           </div>
         </div>
         <div className="blockContainer">
@@ -251,7 +246,10 @@ class ArticleRequirements extends Component {
             <h2 className="subtitle">Technologies</h2>
           </div>
           <div className="colContainer" id="technologyContainer">
-            <div className="rowContainer lessMargin lastItem" onClick={(e)=>this.handleInputs("technology",e)}>
+            <div
+              className="rowContainer lessMargin lastItem"
+              onClick={(e) => this.handleInputs("technology", e)}
+            >
               <div className="addNewItem">
                 <img src="/icon/plus.svg" className="plusImage" />
                 <span>ADD NEW TECHNOLOGY</span>
@@ -264,7 +262,10 @@ class ArticleRequirements extends Component {
             <h2 className="subtitle">Tags</h2>
           </div>
           <div className="colContainer" id="tagContainer">
-            <div className="rowContainer lessMargin lastItem" onClick={(e)=>this.handleInputs("tag",e)}>
+            <div
+              className="rowContainer lessMargin lastItem"
+              onClick={(e) => this.handleInputs("tag", e)}
+            >
               <div className="addNewItem">
                 <img src="/icon/plus.svg" className="plusImage" />
                 <span>ADD NEW TAG</span>

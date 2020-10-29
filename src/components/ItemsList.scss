@@ -40,10 +40,11 @@ $black: #2e2f2f;
       transition: 400ms;
     }
 
-    &:hover{
+    &:hover {
       background-color: $main-color;
-     
-      h3, h4{
+
+      h3,
+      h4 {
         color: $background-color;
       }
     }
@@ -206,7 +207,7 @@ $black: #2e2f2f;
     list-style: none;
     justify-content: space-around;
     align-items: center;
-    
+
     margin-bottom: 50px;
 
     li {
