@@ -51,7 +51,6 @@ class DynamicContent extends Component {
     }
   
   render() {
-    console.log(this.state.dynamicContent)
     return (
       <React.Fragment>
         <div className="mainContainer2">

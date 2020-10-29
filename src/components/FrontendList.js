@@ -14,13 +14,11 @@ export default class FrontendList extends Component {
   }
 
   async componentDidMount() {
-    console.log("hola");
     const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/frontend");
     const posts = (await res).data;
 
     this.setState({ frontend: posts.techs });
 
-    console.log(this.state.frontend);
   }
 
   onChangePage(pageOfItems) {
@@ -49,7 +47,6 @@ export default class FrontendList extends Component {
       
       var newData = this.state.frontend
       newData.splice(count,1)
-      console.log(this.state.pageOfItems)
   
       this.setState({pageOfItems: newData })
       

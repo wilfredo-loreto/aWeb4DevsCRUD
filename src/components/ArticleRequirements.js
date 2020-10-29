@@ -75,7 +75,6 @@ class ArticleRequirements extends Component {
     var i = 0;
     for (i = 1; i < childs.length; i++) {
       childs[i].firstElementChild.setAttribute("id", type+ " " + i);
-      console.log("im in for");
     }
   }
   handleInputs(inputType,event){
@@ -148,7 +147,6 @@ class ArticleRequirements extends Component {
 
   }
   render() {
-    console.log(this.state.newDocInfo)
     return (
       <React.Fragment>
         <div className="blockContainer">

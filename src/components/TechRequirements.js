@@ -95,7 +95,7 @@ class CreateDocument extends Component {
           var i=0
           for(i=1;i<childs.length;i++){
             childs[i].firstElementChild.setAttribute("id",type +" "+i)
-            console.log("im in for");
+          
           }
         }
         handleInputs(inputType,event){
@@ -152,8 +152,6 @@ class CreateDocument extends Component {
   }
   
   render() {
-       
-    console.log(this.state.newDocInfo)
     
     return (
       <React.Fragment>

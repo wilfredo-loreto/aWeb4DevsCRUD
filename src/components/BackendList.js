@@ -14,13 +14,10 @@ export default class BackendList extends Component {
   }
 
   async componentDidMount() {
-    console.log("hola");
     const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/backend");
     const posts = (await res).data;
 
     this.setState({ backend: posts.techs });
-
-    console.log(this.state.backend);
   }
 
   onChangePage(pageOfItems) {
@@ -49,8 +46,6 @@ export default class BackendList extends Component {
       
       var newData = this.state.backend
       newData.splice(count,1)
-      console.log(this.state.pageOfItems)
-  
       this.setState({pageOfItems: newData })
       
     }

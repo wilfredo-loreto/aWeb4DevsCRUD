@@ -22,8 +22,6 @@ export default class ArticlesList extends Component {
     const posts = (await res).data;
 
     this.setState({ data: posts.articles });
-
-    console.log(this.state.data);
   }
 
   onChangePage(pageOfItems) {
@@ -52,8 +50,6 @@ export default class ArticlesList extends Component {
       
       var newData = this.state.data
       newData.splice(count,1)
-      console.log(this.state.pageOfItems)
-  
       this.setState({pageOfItems: newData })
       
     }
@@ -63,9 +59,6 @@ export default class ArticlesList extends Component {
 
   render() {
     var data = this.state.data;
-    console.log(data)
-    
-
     return (
       <React.Fragment>
         <div className="mainContainer">

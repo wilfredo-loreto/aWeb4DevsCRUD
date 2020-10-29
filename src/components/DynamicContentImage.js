@@ -31,7 +31,7 @@ class DynamicContentImage extends Component {
 
     reader.onload=(e)=>{
 
-      console.log(e.target.result)
+      
     }
 
     var image = this.state.image
