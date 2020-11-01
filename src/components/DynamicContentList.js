@@ -8,24 +8,40 @@ class DynamicContentList extends Component {
     this.state = {
       list: {
         type: "list",
-        content: []
-      }
-    }
-
+        content: [],
+      },
+      auxList: 0,
+    };
 
     this.handleInputs = this.handleInputs.bind(this);
     this.setIds = this.setIds.bind(this);
+    this.deleteInput = this.deleteInput.bind(this);
+    this.inputValue = this.inputValue.bind(this);
   }
+
+  componentDidMount() {
+    if (this.props.isEdit) {
+      var list = this.state.list;
+      if (this.props.content != null) {
+        list.content = this.props.content;
+
+        const auxList = list.content.length;
+
+        this.setState({ list: list, auxList: auxList });
+      }
+    }
+  }
+
   setIds(parent, type) {
     var childs = parent.childNodes;
+    console.log(childs);
     var i = 0;
     for (i = 1; i < childs.length; i++) {
       if (type == "list") {
-        childs[i].childNodes[1].setAttribute(
+        childs[i].childNodes[0].setAttribute(
           "id",
           this.props.order + " " + type + " item " + i
         );
-        childs[i].firstElementChild.innerHTML = i + ".";
       } else {
         childs[i].firstElementChild.setAttribute("id", type + " " + i);
       }
@@ -45,44 +61,66 @@ class DynamicContentList extends Component {
     closeImg.setAttribute("src", "/icon/close.svg");
     closeImg.addEventListener("click", deleteInput.bind(this));
 
-    if (inputType == "list") {
-      var label = document.createElement("label");
-      label.setAttribute("class", "numberlist");
-      container.appendChild(label);
-    }
-
-    inputElement.addEventListener("keypress",(e)=>{if(e.key == "Enter"){
-      this.handleInputs(inputType,order,e)
-    }})
-    container.appendChild(inputElement)
-    container.appendChild(closeImg)
+    inputElement.addEventListener("keypress", (e) => {
+      if (e.key == "Enter") {
+        this.handleInputs(inputType, order, e);
+      }
+    });
+    container.appendChild(inputElement);
+    container.appendChild(closeImg);
     parent.appendChild(container);
     inputElement.focus();
     this.setIds(parent, inputType);
 
     inputElement.addEventListener("input", () => {
-      var docInfo = this.state.list
- 
-        docInfo.content[inputElement.id.split("item")[1] - 1] = inputElement.value
+      var docInfo = this.state.list;
 
-        this.setState({list: docInfo})
-        
-    })
+      docInfo.content[inputElement.id.split("item")[1] - 1] =
+        inputElement.value;
+
+      this.setState({ list: docInfo });
+    });
 
     function deleteInput(event) {
       parent.removeChild(event.currentTarget.parentNode);
+
       this.setIds(parent, inputType);
 
-      var docInfo = this.state.list
- 
-      docInfo.content.splice(inputElement.id.split("item")[1] - 1,1)
+      var docInfo = this.state.list;
 
-      this.setState({list: docInfo})
+      docInfo.content.splice(inputElement.id.split("item")[1] - 1, 1);
+
+      this.setState({ list: docInfo });
     }
 
-    this.props.addDynamicContent(this.state.list, this.props.order)
-
+    this.props.addDynamicContent(this.state.list, this.props.order);
   }
+  inputValue(event, i) {
+    var docInfo = this.state.list;
+
+    docInfo.content[i] = event.target.value;
+
+    this.setState({ list: docInfo });
+  }
+
+  deleteInput(order, event, i) {
+    var parent = document.getElementById(order + "listContainer");
+    var childs = parent.childNodes;
+    console.log(childs);
+
+    var docInfo = this.state.list;
+
+    docInfo.content.splice(i, 1);
+
+    this.setState({ list: docInfo });
+
+    if (i < this.state.auxList) {
+      this.setState({ auxList: this.state.auxList - 1 });
+      console.log(this.state.list);
+    }
+    this.setIds(parent, "list");
+  }
+
   render() {
     return (
       <div className="blockContainer dynamicContentList">
@@ -104,6 +142,29 @@ class DynamicContentList extends Component {
               <span>ADD NEW LIST ITEM</span>
             </div>
           </div>
+          {this.props.content != null
+            ? this.props.content.map((item, i) => (
+                <React.Fragment key={"list" + i}>
+                  {i < this.state.auxList ? (
+                    <div className="rowContainer lessMargin">
+                      <input
+                        id={this.props.order + " " + "list item " + (i + 1)}
+                        type="text"
+                        value={item}
+                        onChange={(e) => this.inputValue(e, i)}
+                        className="totalWidth"
+                      />
+                      <img
+                        src="/icon/close.svg"
+                        onClick={(e) =>
+                          this.deleteInput(this.props.order, e, i)
+                        }
+                      />
+                    </div>
+                  ) : null}
+                </React.Fragment>
+              ))
+            : null}
         </div>
       </div>
     );

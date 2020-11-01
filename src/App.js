@@ -1,91 +1,59 @@
-import React from 'react';
-import './App.scss';
-import Header from "./components/Header"
-import ArticlesList from "./components/ArticlesList"
-import FrontendList from "./components/FrontendList"
-import BackendList from "./components/BackendList"
-import CreateDocument from "./components/CreateDocument"
+import React from "react";
+import "./App.scss";
+import Header from "./components/Header";
+import ArticlesList from "./components/ArticlesList";
+import FrontendList from "./components/FrontendList";
+import BackendList from "./components/BackendList";
+import CreateDocument from "./components/CreateDocument";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,withRouter
+  Route,
+  withRouter,
 } from "react-router-dom";
 
-const EditComponent = withRouter(props=> <CreateDocument {...props}/>)
+const EditComponent = withRouter((props) => <CreateDocument {...props} />);
 
 function App() {
-
-  
   return (
     <Router>
       <div className="app">
+        <Header />
 
-        <Header/>
-       
         <Switch>
-
-        {/*  window.onbeforeunload = function preguntarAntesDeSalir()
+          {/* window.onbeforeunload = function askBeforeLeaving()
     {
-        return "¿Seguro que quieres salir?";
+        return "¿You sure want to leave?";
     }
   */}
 
           <Route path="/" exact>
-
-            <h1>1</h1>
-
+            <img src="/img/AWeb4Devs.png" className="imageInicio" alt="" />
           </Route>
 
           <Route path="/articles">
-      
-          
-            <ArticlesList 
-              title = "Articles"
-              link = "articles"
-            
-            />
-
+            <ArticlesList title="Articles" link="articles" />
           </Route>
 
           <Route path="/frontend">
-
-          <FrontendList
-              title = "Front-end Techs"
-            
-        
-            />
-
+            <FrontendList title="Front-end Techs" />
           </Route>
 
           <Route path="/backend">
-
-          <BackendList 
-              title = "Back-end Techs"
-           
-           
-            />
-
+            <BackendList title="Back-end Techs" />
           </Route>
 
           <Route path="/create">
-
-          <CreateDocument />
-
+            <CreateDocument />
           </Route>
 
           <Route path="/edit/:type/:title">
-
-          <EditComponent isEdit={true} />
-
+            <EditComponent isEdit={true} />
           </Route>
-
         </Switch>
-
       </div>
     </Router>
   );
 }
-
-
 
 export default App;

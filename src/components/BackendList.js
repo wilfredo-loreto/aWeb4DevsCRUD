@@ -28,33 +28,25 @@ export default class BackendList extends Component {
     this.setState({ pageOfItems: pageOfItems });
   }
 
-  corfirmAlert(title, count){
-   
-    if(window.confirm("Are you sure?")){
-
-      this.deleteArticle(title, count)
-
+  corfirmAlert(title, count) {
+    if (window.confirm("Are you sure?")) {
+      this.deleteArticle(title, count);
     }
-
   }
 
-  async deleteArticle(title, count){
-
+  async deleteArticle(title, count) {
     const res = axios.delete(
       "http://aweb4devsapi.herokuapp.com/delete-tech/" + title
-    )
-    const posts = (await res).data
-    
-    if(posts.message === "deleted"){
-      
-      var newData = this.state.backend
-      newData.splice(count,1)
-      console.log(this.state.pageOfItems)
-  
-      this.setState({pageOfItems: newData })
-      
-    }
+    );
+    const posts = (await res).data;
 
+    if (posts.message === "deleted") {
+      var newData = this.state.backend;
+      newData.splice(count, 1);
+      console.log(this.state.pageOfItems);
+
+      this.setState({ pageOfItems: newData });
+    }
   }
 
   render() {
@@ -96,7 +88,11 @@ export default class BackendList extends Component {
                     </Link>
 
                     <div className="delete">
-                      <img onClick={() => this.corfirmAlert(article.title,count)} src="/icon/delete.png" alt="delete icon" />
+                      <img
+                        onClick={() => this.corfirmAlert(article.title, count)}
+                        src="/icon/delete.png"
+                        alt="delete icon"
+                      />
                       <h3>DELETE</h3>
                     </div>
                   </td>

@@ -113,6 +113,10 @@
     flex-flow: column nowrap;
     justify-content: space-around;
     margin-top: 15px;
+
+    span{
+      color: white;
+    }
     img[src="/icon/close.svg"] {
       width: 20px;
       height: 20px;

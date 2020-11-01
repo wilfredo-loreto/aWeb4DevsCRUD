@@ -15,7 +15,6 @@ export default class ArticlesList extends Component {
   }
 
   async componentDidMount() {
-    
     const res = axios.get(
       "http://aweb4devsapi.herokuapp.com/" + this.props.link
     );
@@ -31,40 +30,30 @@ export default class ArticlesList extends Component {
     this.setState({ pageOfItems: pageOfItems });
   }
 
-  corfirmAlert(title, count){
-   
-    if(window.confirm("Are you sure?")){
-
-      this.deleteArticle(title, count)
-
+  corfirmAlert(title, count) {
+    if (window.confirm("Are you sure?")) {
+      this.deleteArticle(title, count);
     }
-
   }
 
-  async deleteArticle(title, count){
-
+  async deleteArticle(title, count) {
     const res = axios.delete(
       "http://aweb4devsapi.herokuapp.com/delete-article/" + title
-    )
-    const posts = (await res).data
-    
-    if(posts.message === "deleted"){
-      
-      var newData = this.state.data
-      newData.splice(count,1)
-      console.log(this.state.pageOfItems)
-  
-      this.setState({pageOfItems: newData })
-      
-    }
+    );
+    const posts = (await res).data;
 
+    if (posts.message === "deleted") {
+      var newData = this.state.data;
+      newData.splice(count, 1);
+      console.log(this.state.pageOfItems);
+
+      this.setState({ pageOfItems: newData });
+    }
   }
- 
 
   render() {
     var data = this.state.data;
-    console.log(data)
-    
+    console.log(data);
 
     return (
       <React.Fragment>
@@ -101,12 +90,18 @@ export default class ArticlesList extends Component {
                   <td className="tableTitle">{article.title}</td>
                   <td className="tableDate">{article.date.split("T")[0]}</td>
                   <td className="tableActions">
-                    <Link className="edit" to={"/edit/article/" + article.title}>
-                      <img src="/icon/edit.png" />
+                    <Link
+                      className="edit"
+                      to={"/edit/article/" + article.title}
+                    >
+                      <img src="/icon/edit.png" alt="edit icon" />
                       <h3>EDIT</h3>
                     </Link>
 
-                    <div onClick={() => this.corfirmAlert(article.title,count)} className="delete">
+                    <div
+                      onClick={() => this.corfirmAlert(article.title, count)}
+                      className="delete"
+                    >
                       <img src="/icon/delete.png" alt="delete icon" />
                       <h3>DELETE</h3>
                     </div>
