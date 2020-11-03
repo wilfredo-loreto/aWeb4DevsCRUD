@@ -71,7 +71,6 @@ class CreateDocument extends Component {
     console.log(newDoc.content + "this is newDoc.content");
 
     var inputsImages = document.querySelectorAll('input[type="file"]');
-    console.log(inputsImages + "this is inputs values");
 
     for (i = 0; i < inputsImages.length; i++) {
       images[i] = inputsImages[i].files[0];
@@ -251,8 +250,6 @@ class CreateDocument extends Component {
     }
   }
   render() {
-    console.log(this.state.newDoc);
-
     return (
       <form className="form">
         <div className="hideToolbar">

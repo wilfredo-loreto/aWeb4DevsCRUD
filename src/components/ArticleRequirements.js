@@ -5,6 +5,7 @@ class ArticleRequirements extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      file: null,
       selectedTechType: "",
       newDocInfo: {
         title: "",
@@ -52,6 +53,9 @@ class ArticleRequirements extends Component {
     this.setState({ newDocInfo: docInfo });
 
     this.props.newDocData(this.state.newDocInfo);
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0]),
+    });
   }
 
   handleSummary(event) {
@@ -72,7 +76,7 @@ class ArticleRequirements extends Component {
       console.log("im in for");
     }
   }
-  handleInputs(inputType, event, aux) {
+  handleInputs(inputType, event) {
     var inputElement = document.createElement("input");
 
     var container = document.createElement("div");
@@ -310,12 +314,8 @@ class ArticleRequirements extends Component {
                 className="submitButton"
                 accept="image/*"
               />
-              <input
-                type="text"
-                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
-                className="lessWidth"
-              />
             </div>
+            <img src={this.state.file} />
           </div>
         </div>
         <div className="blockContainer">
@@ -325,7 +325,7 @@ class ArticleRequirements extends Component {
           <div className="colContainer" id="technologyContainer">
             <div
               className="rowContainer lessMargin lastItem"
-              onClick={(e) => this.handleInputs("technology", e, false)}
+              onClick={(e) => this.handleInputs("technology", e)}
             >
               <div className="addNewItem">
                 <img src="/icon/plus.svg" className="plusImage" />
@@ -362,7 +362,7 @@ class ArticleRequirements extends Component {
           <div className="colContainer" id="tagContainer">
             <div
               className="rowContainer lessMargin lastItem"
-              onClick={(e) => this.handleInputs("tag", e, false)}
+              onClick={(e) => this.handleInputs("tag", e)}
             >
               <div className="addNewItem">
                 <img src="/icon/plus.svg" className="plusImage" />

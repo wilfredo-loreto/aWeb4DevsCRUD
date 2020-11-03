@@ -14,13 +14,14 @@ export default class BackendList extends Component {
   }
 
   async componentDidMount() {
-    console.log("hola");
-    const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/backend");
-    const posts = (await res).data;
+    try {
+      const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/backend");
+      const posts = (await res).data;
 
-    this.setState({ backend: posts.techs });
-
-    console.log(this.state.backend);
+      this.setState({ backend: posts.techs });
+    } catch (err) {
+      alert("error during http request: " + err);
+    }
   }
 
   onChangePage(pageOfItems) {
@@ -43,8 +44,6 @@ export default class BackendList extends Component {
     if (posts.message === "deleted") {
       var newData = this.state.backend;
       newData.splice(count, 1);
-      console.log(this.state.pageOfItems);
-
       this.setState({ pageOfItems: newData });
     }
   }

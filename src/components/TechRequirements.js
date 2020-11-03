@@ -5,8 +5,9 @@ class CreateDocument extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      previewCard: null,
+      previewLogo: null,
       selectedTechType: "",
-
       newDocInfo: {
         title: "",
         type: "",
@@ -39,7 +40,10 @@ class CreateDocument extends Component {
 
     docInfo.img = event.target.files[0].name;
 
-    this.setState({ newDocInfo: docInfo });
+    this.setState({
+      newDocInfo: docInfo,
+      previewCard: URL.createObjectURL(event.target.files[0]),
+    });
 
     this.props.newDocData(this.state.newDocInfo);
   }
@@ -51,6 +55,10 @@ class CreateDocument extends Component {
 
     this.setState({ newDocInfo: docInfo });
 
+    this.setState({
+      newDocInfo: docInfo,
+      previewLogo: URL.createObjectURL(event.target.files[0]),
+    });
     this.props.newDocData(this.state.newDocInfo);
   }
 
@@ -89,10 +97,10 @@ class CreateDocument extends Component {
     var i = 0;
     for (i = 1; i < childs.length; i++) {
       childs[i].firstElementChild.setAttribute("id", type + " " + i);
-      console.log("im in for");
     }
   }
   handleInputs(inputType, event) {
+    var previewImg = document.createElement("img");
     var inputElement = document.createElement("input");
     inputElement.setAttribute("type", "text");
     inputElement.setAttribute("class", "lessWidth");
@@ -270,12 +278,8 @@ class CreateDocument extends Component {
                 className="submitButton"
                 accept="image/*"
               />
-              <input
-                type="text"
-                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
-                className="lessWidth"
-              />
             </div>
+            <img src={this.state.previewCard} />
           </div>
         </div>
         <div className="blockContainer">
@@ -293,18 +297,16 @@ class CreateDocument extends Component {
                 className="submitButton"
                 accept="image/png, image/jpg"
               />
-
-              <input
-                type="text"
-                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
-                className="lessWidth"
-              />
             </div>
+            <img src={this.state.previewLogo} />
           </div>
         </div>
         <div className="blockContainer">
           <div className="subtitleContainer">
-            <h2 className="subtitle">Tags (Keywords for Search Bar)</h2>
+            <h2 className="subtitle">
+              Tags (Keywords for Search Bar) (NOTE: FIRST TAG IS THE MAIN TAG TO
+              BE DISPLAYED IN ACCORDION)
+            </h2>
           </div>
           <div className="colContainer" id="tagContainer">
             <div

@@ -14,13 +14,14 @@ export default class FrontendList extends Component {
   }
 
   async componentDidMount() {
-    console.log("hola");
-    const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/frontend");
-    const posts = (await res).data;
+    try {
+      const res = axios.get("http://aweb4devsapi.herokuapp.com/techs/frontend");
+      const posts = (await res).data;
 
-    this.setState({ frontend: posts.techs });
-
-    console.log(this.state.frontend);
+      this.setState({ frontend: posts.techs });
+    } catch (err) {
+      alert("error during http request: " + err);
+    }
   }
 
   onChangePage(pageOfItems) {

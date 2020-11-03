@@ -15,14 +15,16 @@ export default class ArticlesList extends Component {
   }
 
   async componentDidMount() {
-    const res = axios.get(
-      "http://aweb4devsapi.herokuapp.com/" + this.props.link
-    );
-    const posts = (await res).data;
+    try {
+      const res = axios.get(
+        "http://aweb4devsapi.herokuapp.com/" + this.props.link
+      );
+      const posts = (await res).data;
 
-    this.setState({ data: posts.articles });
-
-    console.log(this.state.data);
+      this.setState({ data: posts.articles });
+    } catch (err) {
+      alert("error during http request: " + err);
+    }
   }
 
   onChangePage(pageOfItems) {
@@ -45,16 +47,12 @@ export default class ArticlesList extends Component {
     if (posts.message === "deleted") {
       var newData = this.state.data;
       newData.splice(count, 1);
-      console.log(this.state.pageOfItems);
-
       this.setState({ pageOfItems: newData });
     }
   }
 
   render() {
     var data = this.state.data;
-    console.log(data);
-
     return (
       <React.Fragment>
         <div className="mainContainer">
