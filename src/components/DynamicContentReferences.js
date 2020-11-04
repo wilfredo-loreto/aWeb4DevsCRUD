@@ -165,7 +165,7 @@ class DynamicContentReferences extends Component {
     this.setIds(parent, "reference");
   }
   render() {
-    console.log(this.state.refs);
+ 
     return (
       <div className="blockContainer dynamicContentReferences">
         <div className="subtitleContainer">

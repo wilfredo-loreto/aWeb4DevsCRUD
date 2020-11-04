@@ -197,10 +197,7 @@ class CreateDocument extends Component {
   }
 
   render() {
-    console.log(this.state.newDocInfo);
-    console.log(this.props.toEdit);
-    console.log(this.state.selectedTechType);
-
+  
     return (
       <React.Fragment>
         <div className="blockContainer">

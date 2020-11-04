@@ -208,9 +208,6 @@ class ArticleRequirements extends Component {
   }
 
   render() {
-    console.log(this.state.newDocInfo);
-    console.log(this.props.toEdit);
-    console.log(this.state.selectedTechType);
 
     return (
       <React.Fragment>

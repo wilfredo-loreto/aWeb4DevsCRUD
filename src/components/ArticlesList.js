@@ -63,12 +63,6 @@ export default class ArticlesList extends Component {
             <h3>Create a New Document</h3>
           </Link>
 
-          <div className="searchBar">
-            <input id="searchBar1" type="text" placeholder="Search..." />
-
-            <img className="searchIcon" src="/icon/search.png" alt="" />
-          </div>
-
           <div className="content">
             <table>
               <tr>

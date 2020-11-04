@@ -230,7 +230,6 @@ class CreateDocument extends Component {
     if (this.props.isEdit) {
       var path = this.props.location.pathname;
       var splitted = path.split("/");
-      console.log(splitted);
       var documentType = splitted[2];
       this.setState({ path: documentType, selectedDocType: documentType });
       const documentName = splitted[3];
