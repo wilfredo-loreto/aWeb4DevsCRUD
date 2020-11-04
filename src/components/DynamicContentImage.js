@@ -24,7 +24,9 @@ class DynamicContentImage extends Component {
 
     reader.readAsDataURL(event.target.files[0]);
 
-    reader.onload = (e) => {};
+    reader.onload = (e) => {
+      console.log(e.target.result);
+    };
 
     var image = this.state.image;
     image.content.img = event.target.files[0].name;
@@ -46,6 +48,22 @@ class DynamicContentImage extends Component {
     this.props.addDynamicContent(image, this.props.order);
   }
 
+  componentDidMount(){
+
+    if(this.props.content != null){
+      var image = {
+        type: "image",
+        content: {
+          img: this.props.content.img,
+          alt: this.props.content.alt
+        }
+      };
+
+
+      this.setState({image: image})
+    }
+  }
+
   render() {
     return (
       <div className="blockContainer dynamicContentImage">
@@ -58,6 +76,9 @@ class DynamicContentImage extends Component {
           />
         </div>
         <div className="colContainer">
+          {this.props.content != null ? (
+            <span>{this.props.content.img}</span>
+          ) : null}
           <div className="rowContainer">
             <input
               type="file"
@@ -71,6 +92,7 @@ class DynamicContentImage extends Component {
               type="text"
               placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
               className="lessWidth"
+              value = {this.props.content.alt}
             />
           </div>
           <img src={this.state.showImage} />

@@ -44,6 +44,7 @@ export default class FrontendList extends Component {
     if (posts.message === "deleted") {
       var newData = this.state.frontend;
       newData.splice(count, 1);
+      console.log(this.state.pageOfItems);
 
       this.setState({ pageOfItems: newData });
     }

@@ -16,7 +16,15 @@ class DynamicContentText extends Component {
 
     this.props.addDynamicContent(text, this.props.order);
   }
+
+  textEdit() {
+    var text = [...this.props.content];
+
+    return text.join("\n\n");
+  }
+
   render() {
+    var text;
     return (
       <div className="blockContainer dynamicContentText">
         <div className="subtitleContainer">
@@ -29,10 +37,18 @@ class DynamicContentText extends Component {
         </div>
         <div className="colContainer">
           <div className="rowContainer">
-            <textarea
-              onChange={this.handleText}
-              className="totalWidth textarea"
-            />
+            {this.props.content != null ? (
+              <textarea
+                onChange={this.handleText}
+                value={(text = this.textEdit())}
+                className="totalWidth textarea"
+              />
+            ) : (
+              <textarea
+                onChange={this.handleText}
+                className="totalWidth textarea"
+              />
+            )}
           </div>
         </div>
       </div>

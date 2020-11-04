@@ -92,7 +92,7 @@ export default class ArticlesList extends Component {
                       className="edit"
                       to={"/edit/article/" + article.title}
                     >
-                      <img src="/icon/edit.png" />
+                      <img src="/icon/edit.png" alt="edit icon" />
                       <h3>EDIT</h3>
                     </Link>
 

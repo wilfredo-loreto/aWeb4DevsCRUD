@@ -33,6 +33,7 @@ class DynamicContentSubtitle extends Component {
             <input
               type="text"
               onChange={this.handleSubtitle}
+              value={this.props.content}
               className="totalWidth"
             />
           </div>

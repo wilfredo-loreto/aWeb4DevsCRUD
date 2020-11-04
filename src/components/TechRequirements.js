@@ -53,6 +53,8 @@ class CreateDocument extends Component {
 
     docInfo.logo = event.target.files[0].name;
 
+    this.setState({ newDocInfo: docInfo });
+
     this.setState({
       newDocInfo: docInfo,
       previewLogo: URL.createObjectURL(event.target.files[0]),
@@ -112,7 +114,7 @@ class CreateDocument extends Component {
     closeImg.setAttribute("src", "/icon/close.svg");
     closeImg.addEventListener("click", deleteInput.bind(this));
     inputElement.addEventListener("keypress", (e) => {
-      if (e.key == "Enter") {
+      if (e.key === "Enter") {
         this.handleInputs(inputType, e);
       }
     });
@@ -120,7 +122,6 @@ class CreateDocument extends Component {
     container.appendChild(inputElement);
     container.appendChild(closeImg);
     parent.appendChild(container);
-
     inputElement.focus();
     this.setIds(parent, inputType);
 
@@ -146,7 +147,60 @@ class CreateDocument extends Component {
     this.props.newDocData(this.state.newDocInfo);
   }
 
+  inputValue(event, i, inputType) {
+    var docInfo = this.state.newDocInfo;
+
+    docInfo.tags[i] = event.target.value;
+
+    this.setState({ newDocInfo: docInfo });
+  }
+
+  deleteInput(inputType, event, i) {
+    console.log(event.currentTarget);
+    var parent = document.getElementById(inputType + "Container");
+
+    var docInfo = this.state.newDocInfo;
+
+    docInfo.tags.splice(i, 1);
+
+    this.setState({ newDocInfo: docInfo });
+
+    if (i < this.state.auxTags) {
+      this.setState({ auxTags: this.state.auxTags - 1 });
+    }
+
+    this.setIds(parent, inputType);
+  }
+
+  componentDidMount() {
+    if (this.props.isEdit) {
+      console.log("holaaa");
+      var toEdit = {
+        title: this.props.toEdit.tech.title,
+        type: this.props.toEdit.tech.type,
+        img: this.props.toEdit.tech.img,
+        logo: this.props.toEdit.tech.logo,
+        summary: this.props.toEdit.tech.summary,
+        tags: this.props.toEdit.tech.tags,
+        parent: this.props.toEdit.tech.parent,
+      };
+      console.log(toEdit);
+
+      const auxTags = toEdit.tags.length;
+
+      this.setState({
+        newDocInfo: toEdit,
+        selectedTechType: toEdit.type,
+        auxTags: auxTags,
+      });
+    }
+  }
+
   render() {
+    console.log(this.state.newDocInfo);
+    console.log(this.props.toEdit);
+    console.log(this.state.selectedTechType);
+
     return (
       <React.Fragment>
         <div className="blockContainer">
@@ -156,24 +210,24 @@ class CreateDocument extends Component {
           <div className="colContainer">
             <div className="rowContainer">
               <input
-                checked={this.state.selectedTechType == "Frontend"}
-                name="Frontend"
+                checked={this.state.selectedTechType === "frontend"}
+                name="frontend"
                 onChange={this.handleTechType}
                 type="radio"
               />
 
-              <label className="label" for="isArticle">
+              <label className="label" htmlFor="isArticle">
                 Frontend
               </label>
             </div>
             <div className="rowContainer">
               <input
-                checked={this.state.selectedTechType == "Backend"}
-                name="Backend"
+                checked={this.state.selectedTechType === "backend"}
+                name="backend"
                 onChange={this.handleTechType}
                 type="radio"
               />
-              <label className="label" for="isArticle">
+              <label className="label" htmlFor="isArticle">
                 Backend
               </label>
             </div>
@@ -187,6 +241,7 @@ class CreateDocument extends Component {
             <div className="rowContainer">
               <input
                 type="text"
+                value={this.state.newDocInfo.title}
                 onChange={this.handleTitle}
                 className="lessWidth"
               />
@@ -201,6 +256,7 @@ class CreateDocument extends Component {
             <div className="rowContainer">
               <input
                 type="text"
+                value={this.state.newDocInfo.summary}
                 onChange={this.handleSummary}
                 className="totalWidth"
               />
@@ -212,17 +268,15 @@ class CreateDocument extends Component {
             <h2 className="subtitle">Image</h2>
           </div>
           <div className="colContainer">
+            {this.props.isEdit ? (
+              <span>{this.state.newDocInfo.img}</span>
+            ) : null}
             <div className="rowContainer">
               <input
                 type="file"
                 onChange={this.handleImg}
                 className="submitButton"
                 accept="image/*"
-              />
-              <input
-                type="text"
-                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
-                className="lessWidth"
               />
             </div>
             <img src={this.state.previewCard} />
@@ -233,18 +287,15 @@ class CreateDocument extends Component {
             <h2 className="subtitle">Logo</h2>
           </div>
           <div className="colContainer">
+            {this.props.isEdit ? (
+              <span>{this.state.newDocInfo.logo}</span>
+            ) : null}
             <div className="rowContainer">
               <input
                 onChange={this.handleLogo}
                 type="file"
                 className="submitButton"
                 accept="image/png, image/jpg"
-              />
-
-              <input
-                type="text"
-                placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
-                className="lessWidth"
               />
             </div>
             <img src={this.state.previewLogo} />
@@ -269,6 +320,27 @@ class CreateDocument extends Component {
                 <span>ADD NEW TAG</span>
               </div>
             </div>
+            {this.props.isEdit
+              ? this.props.toEdit.tech.tags.map((tag, i) => (
+                  <React.Fragment key={"tags" + i}>
+                    {i < this.state.auxTags ? (
+                      <div className="rowContainer lessMargin">
+                        <input
+                          id={"technology" + " " + (i + 1)}
+                          type="text"
+                          value={tag}
+                          onChange={(e) => this.inputValue(e, i, "tag")}
+                          className="lessWidth"
+                        />
+                        <img
+                          src="/icon/close.svg"
+                          onClick={(e) => this.deleteInput("tag", e, i)}
+                        />
+                      </div>
+                    ) : null}
+                  </React.Fragment>
+                ))
+              : null}
           </div>
         </div>
         <div className="blockContainer">
@@ -281,6 +353,7 @@ class CreateDocument extends Component {
             <div className="rowContainer">
               <input
                 type="text"
+                value={this.state.newDocInfo.parent}
                 onChange={this.handleParent}
                 className="totalWidth"
               />
