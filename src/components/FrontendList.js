@@ -20,7 +20,7 @@ export default class FrontendList extends Component {
 
       this.setState({ frontend: posts.techs });
     } catch (error) {
-      alert("error during http request: " + err);
+      alert("error during http request: " + error);
     }
   }
 

@@ -20,7 +20,7 @@ export default class BackendList extends Component {
 
       this.setState({ backend: posts.techs });
     } catch (error) {
-      alert("error during http request: " + err);
+      alert("error during http request: " + error);
     }
   }
 

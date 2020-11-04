@@ -23,7 +23,7 @@ export default class ArticlesList extends Component {
 
       this.setState({ data: posts.articles });
     } catch (error) {
-      alert("error during http request: " + err);
+      alert("error during http request: " + error);
     }
   }
 
