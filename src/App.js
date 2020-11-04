@@ -21,11 +21,11 @@ function App() {
         <Header />
 
         <Switch>
-          {/* window.onbeforeunload = function askBeforeLeaving()
+          {window.onbeforeunload = function askBeforeLeaving()
     {
-        return "¿You sure want to leave?";
+        return "Are you sure you want to leave?";
     }
-  */}
+  }
 
           <Route path="/" exact>
             <img src="/img/AWeb4Devs.png" className="imageInicio" alt="" />

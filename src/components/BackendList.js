@@ -19,8 +19,8 @@ export default class BackendList extends Component {
       const posts = (await res).data;
 
       this.setState({ backend: posts.techs });
-    } catch (err) {
-      alert("error during http request: " + err);
+    } catch (error) {
+      alert("error during http request: " + error);
     }
   }
 

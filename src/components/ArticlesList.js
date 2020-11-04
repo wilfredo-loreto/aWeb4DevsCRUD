@@ -22,8 +22,8 @@ export default class ArticlesList extends Component {
       const posts = (await res).data;
 
       this.setState({ data: posts.articles });
-    } catch (err) {
-      alert("error during http request: " + err);
+    } catch (error) {
+      alert("error during http request: " + error);
     }
   }
 
