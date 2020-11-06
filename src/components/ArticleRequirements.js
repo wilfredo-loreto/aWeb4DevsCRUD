@@ -204,6 +204,8 @@ class ArticleRequirements extends Component {
         auxTechs: auxTechs,
         auxTags: auxTags,
       });
+
+  
     }
   }
 

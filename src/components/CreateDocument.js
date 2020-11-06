@@ -3,6 +3,7 @@ import ArticleRequirements from "./ArticleRequirements";
 import TechRequirements from "./TechRequirements";
 import DynamicContent from "./DynamicContent";
 import axios from "axios";
+import config from "../config"
 import "./CreateDocument.scss";
 
 class CreateDocument extends Component {
@@ -32,6 +33,7 @@ class CreateDocument extends Component {
   }
 
   newDocData(newDocInfo) {
+    
     if (this.state.selectedDocType == "article") {
       var newArticle = {
         title: newDocInfo.title,
@@ -41,6 +43,7 @@ class CreateDocument extends Component {
         technologies: newDocInfo.technologies,
         tags: newDocInfo.tags,
         content: this.state.newDoc.content,
+        password: config.SECRET_PASSWORD
       };
 
       this.setState({ newDoc: newArticle });
@@ -54,8 +57,9 @@ class CreateDocument extends Component {
         tags: newDocInfo.tags,
         parent: newDocInfo.parent,
         content: this.state.newDoc.content,
+        password: config.SECRET_PASSWORD
       };
-
+   
       this.setState({ newDoc: newtech });
     }
   }
@@ -239,11 +243,18 @@ class CreateDocument extends Component {
         .get(url)
         .then((res) => {
           this.setState({ docToEdit: res.data });
-          console.log(this.state.docToEdit);
+         
         })
         .catch((err) => {
           console.log(err);
         });
+
+        if(documentType == "article"){
+
+          this.newDocData(this.state.docToEdit.article)
+        }else{
+          this.newDocData(this.state.docToEdit.tech)
+        }
 
       this.handleBlocks(documentType);
     }

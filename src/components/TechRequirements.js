@@ -174,7 +174,6 @@ class CreateDocument extends Component {
 
   componentDidMount() {
     if (this.props.isEdit) {
-      console.log("holaaa");
       var toEdit = {
         title: this.props.toEdit.tech.title,
         type: this.props.toEdit.tech.type,
@@ -193,6 +192,8 @@ class CreateDocument extends Component {
         selectedTechType: toEdit.type,
         auxTags: auxTags,
       });
+
+      
     }
   }
 
