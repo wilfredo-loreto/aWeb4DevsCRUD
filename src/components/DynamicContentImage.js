@@ -59,7 +59,6 @@ class DynamicContentImage extends Component {
         }
       };
 
-
       this.setState({image: image})
     }
   }

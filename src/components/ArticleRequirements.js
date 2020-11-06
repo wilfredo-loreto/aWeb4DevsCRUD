@@ -204,13 +204,12 @@ class ArticleRequirements extends Component {
         auxTechs: auxTechs,
         auxTags: auxTags,
       });
+
+  
     }
   }
 
   render() {
-    console.log(this.state.newDocInfo);
-    console.log(this.props.toEdit);
-    console.log(this.state.selectedTechType);
 
     return (
       <React.Fragment>
