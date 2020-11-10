@@ -94,6 +94,7 @@ class CreateDocument extends Component {
     if (this.state.selectedDocType == "article") {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
 
+
       if (
         newDoc.title == "" ||
         newDoc.summary == "" ||
@@ -103,10 +104,14 @@ class CreateDocument extends Component {
         newDoc.tags == null
       ) {
         requirements = false;
+      }else{
+        
+       newDoc.tags.push(newDoc.title)
+        newDoc.tags.push(newDoc.type)
       }
     } else {
       url = "http://aweb4devsapi.herokuapp.com/save-tech";
-
+        
       if (
         newDoc.title == "" ||
         newDoc.summary == "" ||
@@ -116,6 +121,10 @@ class CreateDocument extends Component {
         newDoc.tags == null
       ) {
         requirements = false;
+      }else{
+        newDoc.tags.push(newDoc.title)
+        newDoc.tags.push(newDoc.type)
+
       }
     }
 
@@ -132,7 +141,7 @@ class CreateDocument extends Component {
           );
           const res2 = await saveImages;
           console.log(res2);
-          window.alert(res2);
+          window.alert("Uploaded Images");
         } catch (err) {
           console.log(err);
           window.alert(err);
@@ -216,7 +225,7 @@ class CreateDocument extends Component {
             );
             const res2 = await saveImages;
             console.log(res2);
-            window.alert(res2);
+            window.alert("Uploaded Images");
           } catch (err) {
             console.log(err);
             window.alert(err);
