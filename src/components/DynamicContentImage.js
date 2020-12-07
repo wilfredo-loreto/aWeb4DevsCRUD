@@ -101,7 +101,6 @@ class DynamicContentImage extends Component {
               type="text"
               placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
               className="lessWidth"
-            
             />
           )}
             

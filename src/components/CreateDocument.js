@@ -106,7 +106,7 @@ class CreateDocument extends Component {
         requirements = false;
       }else{
         
-       newDoc.tags.push(newDoc.title)
+        newDoc.tags.push(newDoc.title)
         newDoc.tags.push(newDoc.type)
       }
     } else {
@@ -219,16 +219,17 @@ class CreateDocument extends Component {
         window.alert(res);
         if (aux) {
           try {
-            const saveImages = axios.post(
-              "http://aweb4devsapi.herokuapp.com/hosting/save-images",
-              formData
-            );
-            const res2 = await saveImages;
-            console.log(res2);
-            window.alert("Uploaded Images");
+          // CODE TO UPLOAD IMAGES TO VERCEL MUST BE HERE 
+          //   const saveImages = axios.post(
+          //     "http://aweb4devsapi.herokuapp.com/hosting/save-images",
+          //     formData
+          //   );
+          //   const res2 = await saveImages;
+          //   console.log(res2);
+          //   window.alert("Uploaded Images");
           } catch (err) {
-            console.log(err);
-            window.alert(err);
+          //   console.log(err);
+          //   window.alert(err);
           }
         }
       } catch (err) {
