@@ -85,14 +85,26 @@ class DynamicContentImage extends Component {
               onChange={this.handleImg}
               accept="image/*"
             />
+             {this.props.content != null ? (
+               <input
+               id="altText"
+               onChange={this.handleAltText}
+               type="text"
+               placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
+               className="lessWidth"
+               value = {this.props.content.alt}
+             />
+          ) : (
             <input
               id="altText"
               onChange={this.handleAltText}
               type="text"
               placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
               className="lessWidth"
-              value = {this.props.content.alt}
+            
             />
+          )}
+            
           </div>
           <img src={this.state.showImage} />
         </div>
