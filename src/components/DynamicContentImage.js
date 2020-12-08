@@ -103,7 +103,6 @@ class DynamicContentImage extends Component {
               className="lessWidth"
             />
           )}
-            
           </div>
           <img src={this.state.showImage} />
         </div>
