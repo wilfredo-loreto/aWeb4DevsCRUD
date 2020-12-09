@@ -101,10 +101,8 @@ class DynamicContentImage extends Component {
               type="text"
               placeholder="ALTERNATIVE TEXT (SEO) CONTEXT AND SUBJECT"
               className="lessWidth"
-            
             />
           )}
-            
           </div>
           <img className="image" src={this.state.showImage} />
         </div>
