@@ -106,7 +106,7 @@ class DynamicContentImage extends Component {
           )}
             
           </div>
-          <img src={this.state.showImage} />
+          <img className="image" src={this.state.showImage} />
         </div>
       </div>
     );

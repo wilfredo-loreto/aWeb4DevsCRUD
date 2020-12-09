@@ -22,6 +22,12 @@
   flex-flow: column nowrap;
   align-items: center;
 }
+.image{
+  width:100%;
+  height:auto;
+  max-height:600px;
+  max-width: 600px;
+}
 .toolsContainer {
   width: 80px;
   padding: 8px 0;

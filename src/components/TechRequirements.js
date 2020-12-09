@@ -102,15 +102,15 @@ class CreateDocument extends Component {
   handleInputs(inputType, event) {
     var previewImg = document.createElement("img");
     var inputElement = document.createElement("input");
+    var closeImg = document.createElement("img");
+    var container = document.createElement("div");
+    var parent = document.getElementById(inputType + "Container");
+
     inputElement.setAttribute("type", "text");
     inputElement.setAttribute("class", "lessWidth");
 
-    var container = document.createElement("div");
     container.setAttribute("class", "rowContainer lessMargin");
-
-    var parent = document.getElementById(inputType + "Container");
-
-    var closeImg = document.createElement("img");
+    
     closeImg.setAttribute("src", "/icon/close.svg");
     closeImg.addEventListener("click", deleteInput.bind(this));
     inputElement.addEventListener("keypress", (e) => {
@@ -118,7 +118,7 @@ class CreateDocument extends Component {
         this.handleInputs(inputType, e);
       }
     });
-    closeImg.addEventListener("click", deleteInput.bind(this));
+
     container.appendChild(inputElement);
     container.appendChild(closeImg);
     parent.appendChild(container);
@@ -277,7 +277,7 @@ class CreateDocument extends Component {
                 accept="image/*"
               />
             </div>
-            <img src={this.state.previewCard} />
+            <img className="image" src={this.state.previewCard} />
           </div>
         </div>
         <div className="blockContainer">
@@ -296,7 +296,7 @@ class CreateDocument extends Component {
                 accept="image/png, image/jpg"
               />
             </div>
-            <img src={this.state.previewLogo} />
+            <img className="image" src={this.state.previewLogo} />
           </div>
         </div>
         <div className="blockContainer">

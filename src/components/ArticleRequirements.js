@@ -73,7 +73,7 @@ class ArticleRequirements extends Component {
     var i = 0;
     for (i = 1; i < childs.length; i++) {
       childs[i].firstElementChild.setAttribute("id", type + " " + i);
-      console.log("im in for");
+  
     }
   }
   handleInputs(inputType, event) {
@@ -314,7 +314,7 @@ class ArticleRequirements extends Component {
                 accept="image/*"
               />
             </div>
-            <img src={this.state.file} />
+            <img className="image" src={this.state.file} />
           </div>
         </div>
         <div className="blockContainer">
