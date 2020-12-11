@@ -122,7 +122,12 @@ class CreateDocument extends Component {
       ) {
         requirements = false;
       }else{
-        newDoc.tags.push(newDoc.title)
+        let titleTags = newDoc.title.split(" ");
+     
+        for(i = 0; i < titleTags.length; i++){
+
+          newDoc.tags.push(titleTags[i].toLowerCase());
+        }
         newDoc.tags.push(newDoc.type)
 
       }
@@ -134,6 +139,7 @@ class CreateDocument extends Component {
         const res = (await saveDoc).data;
         console.log(res);
         window.alert(res);
+        document.location.reload(true);
         try {
           // CODE TO UPLOAD TO VERCEL MUST BE HERE
           // const saveImages = axios.post(
@@ -218,6 +224,7 @@ class CreateDocument extends Component {
         const res = (await saveDoc).data;
         console.log(res);
         window.alert(res);
+        document.location.reload(true);
         if (aux) {
           try {
           // CODE TO UPLOAD IMAGES TO VERCEL MUST BE HERE 
