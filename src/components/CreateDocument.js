@@ -69,6 +69,7 @@ class CreateDocument extends Component {
     var url, i;
     var images = [];
     var requirements = true;
+    var validtitle = true; 
 
     newDoc.content = content;
 
@@ -91,6 +92,11 @@ class CreateDocument extends Component {
 
     this.setState({ newDoc: newDoc });
 
+    if(newDoc.title.search("-")!= -1){
+
+        validtitle = false;
+    }
+
     if (this.state.selectedDocType == "article") {
       url = "http://aweb4devsapi.herokuapp.com/save-article";
 
@@ -101,7 +107,8 @@ class CreateDocument extends Component {
         newDoc.img == "" ||
         newDoc.type == "" ||
         newDoc.technologies == null ||
-        newDoc.tags == null
+        newDoc.tags == null ||
+        !validtitle
       ) {
         requirements = false;
       }else{
@@ -118,7 +125,8 @@ class CreateDocument extends Component {
         newDoc.img == "" ||
         newDoc.type == "" ||
         newDoc.logo == "" ||
-        newDoc.tags == null
+        newDoc.tags == null ||
+        !validtitle
       ) {
         requirements = false;
       }else{
@@ -158,7 +166,7 @@ class CreateDocument extends Component {
         window.alert(err);
       }
     } else {
-      window.alert("Please fill all fields");
+      window.alert("Please fill all fields and make sure the title is not hyphenated ");
     }
   }
   async dynamicContentEdit(content) {
@@ -167,6 +175,7 @@ class CreateDocument extends Component {
     var images = [];
     var aux = false;
     var requirements = true;
+    var validtitle = true; 
 
     newDoc.content = content;
     console.log(newDoc.content + "this is newDoc.content");
@@ -176,6 +185,12 @@ class CreateDocument extends Component {
 
     for (i = 0; i < inputsImages.length; i++) {
       images[i] = inputsImages[i].files[0];
+    }
+
+    
+    if(newDoc.title.search("-")!= -1){
+
+      validtitle = false;
     }
 
     var formData = new FormData();
@@ -199,7 +214,8 @@ class CreateDocument extends Component {
         newDoc.img == "" ||
         newDoc.type == "" ||
         newDoc.technologies == null ||
-        newDoc.tags == null
+        newDoc.tags == null ||
+        !validtitle
       ) {
         requirements = false;
       }
@@ -212,7 +228,8 @@ class CreateDocument extends Component {
         newDoc.img == "" ||
         newDoc.type == "" ||
         newDoc.logo == "" ||
-        newDoc.tags == null
+        newDoc.tags == null ||
+        !validtitle
       ) {
         requirements = false;
       }
@@ -245,7 +262,7 @@ class CreateDocument extends Component {
         window.alert(err);
       }
     } else {
-      window.alert("Please fill all fields");
+      window.alert("Please fill all fields and make sure the title is not hyphenated ");
     }
   }
   async componentDidMount() {
